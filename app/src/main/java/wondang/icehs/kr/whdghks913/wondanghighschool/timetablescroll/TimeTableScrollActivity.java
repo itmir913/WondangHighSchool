@@ -177,7 +177,8 @@ public class TimeTableScrollActivity extends ActionBarActivity {
             mCursor.moveToPosition((position * 7) + 1);
 
             for (int period = 1; period <= 7; period++) {
-                String mSubject, mRoom;
+                String mSubject;
+//                String mRoom;
 
                 /**
                  * | | | |
@@ -185,13 +186,13 @@ public class TimeTableScrollActivity extends ActionBarActivity {
                  */
                 if (mGrade == 1) {
                     mSubject = mCursor.getString((mClass * 2) - 2);
-                    mRoom = mCursor.getString((mClass * 2) - 1);
+//                    mRoom = mCursor.getString((mClass * 2) - 1);
                 } else if (mGrade == 2) {
                     mSubject = mCursor.getString(18 + (mClass * 2));
-                    mRoom = mCursor.getString(19 + (mClass * 2));
+//                    mRoom = mCursor.getString(19 + (mClass * 2));
                 } else {
                     mSubject = mCursor.getString(39 + mClass);
-                    mRoom = null;
+//                    mRoom = null;
                 }
 
                 if (mSubject != null && !mSubject.isEmpty()
@@ -199,7 +200,8 @@ public class TimeTableScrollActivity extends ActionBarActivity {
                     mSubject = mSubject.replace("\n", " (") + ")";
                 }
 
-                mText += "\n" + period + "교시 : " + mSubject + "(" + mRoom + ")";
+//                mText += "\n" + period + "교시 : " + mSubject + "(" + mRoom + ")";
+                mText += "\n" + period + "교시 : " + mSubject;
 
                 mCursor.moveToNext();
             }
