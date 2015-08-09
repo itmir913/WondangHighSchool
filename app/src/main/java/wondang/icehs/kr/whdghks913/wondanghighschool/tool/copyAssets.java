@@ -11,8 +11,8 @@ import java.io.InputStream;
 public class copyAssets {
 
     /**
-     * @mFilePath = /sdcard/WondangHS/
-     * @mFileName = WondangTimeTableG1.db
+     * @mFilePath = /data/data/wondang.icehs.kr.whdghks913.wondanghighschool/databases/
+     * @mFileName = WondangTimeTable.db
      */
     public void assetsFileCopy(Context mContext, String mFilePath,
                                String mFileName) {
