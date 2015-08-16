@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="wondang.icehs.kr.whdghks913.wondanghighschool"
-    android:versionCode="30"
-    android:versionName="4.0-2015-08-09" >
+    package="wondang.icehs.kr.whdghks913.wondanghighschool">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

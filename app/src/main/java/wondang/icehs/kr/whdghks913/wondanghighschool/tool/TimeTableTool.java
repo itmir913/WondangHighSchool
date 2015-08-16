@@ -14,7 +14,7 @@ public class TimeTableTool {
 
 //    public final static String mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WondangHS/";
     public final static String mFilePath = "/data/data/wondang.icehs.kr.whdghks913.wondanghighschool/databases/";
-    public final static int dbVersion = 5;
+    public final static int dbVersion = 6;
 
     public final static String[] mDisplayName = {"월요일", "화요일", "수요일", "목요일", "금요일"};
 
