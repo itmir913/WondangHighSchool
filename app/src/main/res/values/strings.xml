@@ -123,7 +123,7 @@
     <string name="no_data_lunch">점심이 없습니다</string>
     <string name="no_data_dinner">저녁이 없습니다</string>
     <string name="no_network_title">인터넷 연결 안됨</string>
-    <string name="no_network_msg">인터넷 연결이 안되서 데이터를 다운로드 할 수 없습니다</string>
+    <string name="no_network_msg">인터넷 연결이 안돼서 데이터를 다운로드 할 수 없습니다</string>
     <string name="shareBap_title">급식 공유하기</string>
     <string name="shareBap_message_msg">%1$s의 급식 목록
 \n\n점심 : %2$s
