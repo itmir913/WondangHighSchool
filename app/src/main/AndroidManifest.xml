@@ -10,12 +10,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- Activity -->
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name=".activity.main.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,29 +28,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".bap.BapActivity"
-            android:label="@string/title_activity_bap" />
+            android:name=".activity.bap.BapActivity"
+            android:label="@string/title_activity_bap"
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".timetablescroll.TimeTableScrollActivity"
-            android:label="@string/title_activity_time_table" />
+            android:name=".activity.timetable.TimeTableActivity"
+            android:label="@string/title_activity_time_table"
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".settings.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/SettingsTheme" />
+            android:name=".activity.settings.SettingsActivity"
+            android:label="@string/title_activity_settings" />
         <activity
-            android:name=".schedule.ScheduleActivity"
-            android:label="@string/title_activity_schedule" />
-        <activity
-            android:name=".info.SchoolInfo"
-            android:label="@string/title_activity_school_info" />
-        <activity
-            android:name=".info.ImageDetailActivity"
-            android:label="@string/title_activity_image_detail" />
+            android:name=".activity.userinfo.UserInfoActivity"
+            android:label="@string/title_activity_user_info"
+            android:theme="@style/AppTheme" />
 
+        <!-- AutoUpdate -->
         <receiver
             android:name=".autoupdate.BroadCast"
             android:label="@string/title_broadcast_autoupdate"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -55,54 +57,40 @@
             android:name=".autoupdate.updateService"
             android:label="@string/title_service_autoupdate" />
 
+        <!-- AppWidget -->
         <receiver
-            android:name=".widget.BapWidget3x3"
-            android:label="@string/widget_3x3_name" >
+            android:name=".widget.BapWidget"
+            android:label="@string/widget_bap_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/bap_widget_3x3_info" />
+                android:resource="@xml/bap_widget_info" />
         </receiver>
         <receiver
-            android:name=".widget.BapWidget3x2"
-            android:label="@string/widget_3x2_name" >
+            android:name=".widget.TimeTableWidget"
+            android:label="@string/widget_timetable_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/bap_widget_3x2_info" />
+                android:resource="@xml/time_table_widget_info" />
         </receiver>
         <receiver
             android:name=".widget.WidgetBroadCast"
             android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.DATE_CHANGED" />
                 <action android:name="android.intent.action.TIME_CHANGED" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="itmir.tistory.com.UPDATE_ACTION" />
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".todaylist.TodayList"
-            android:label="@string/title_activity_today_list" />
-
-        <receiver android:name=".widget.TimeTableWidget2x2"
-            android:label="@string/timetable_widget_3x3_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/time_table_widget2x2_info" />
-        </receiver>
     </application>
 
 </manifest>

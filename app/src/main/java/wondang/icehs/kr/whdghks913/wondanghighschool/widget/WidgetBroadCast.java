@@ -14,16 +14,14 @@ public class WidgetBroadCast extends BroadcastReceiver {
     public void onReceive(Context mContext, Intent mIntent) {
         String ACTION = mIntent.getAction();
 
-        BapWidgetTool.updateWidgetData3x3(mContext);
-        BapWidgetTool.updateWidgetData3x2(mContext);
-
-        TimeTableWidgetTool.updateWidgetData2x2(mContext);
+        BapWidget.updateAllBapWidget(mContext);
 
         if (Intent.ACTION_BOOT_COMPLETED.equals(ACTION)) {
+            // 24시간마다 앱 위젯 업데이트하기
             Calendar mCalendar = Calendar.getInstance();
             AlarmManager mAlarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 
-            Intent mIntentDate = new Intent(mContext, WidgetBroadCast.class).setAction("itmir.tistory.com.UPDATE_ACTION");
+            Intent mIntentDate = new Intent(mContext, WidgetBroadCast.class);
             PendingIntent mPending = PendingIntent.getBroadcast(mContext, 0, mIntentDate, 0);
             mCalendar.set(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH) + 1, 0, 0);
             mAlarm.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 24 * 60 * 60 * 1000, mPending);

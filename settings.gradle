@@ -1,1 +1,1 @@
-include ':app', ':libraries:L-Dialogs', ':libraries:SnackBar', ':libraries:DateTimePicker'
+include ':app'

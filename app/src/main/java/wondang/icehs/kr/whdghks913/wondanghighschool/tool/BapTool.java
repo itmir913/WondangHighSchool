@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import toast.library.meal.MealLibrary;
+import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 
 /**
  * Created by 종환 on 2015-02-17.
@@ -17,12 +18,14 @@ public class BapTool {
     public static final int TYPE_LUNCH = 1;
     public static final int TYPE_DINNER = 2;
 
-    public static final String ACTION_UPDATE = "ACTION_UPDATE";
+    public static final String ACTION_UPDATE = "ACTION_BAP_UPDATE";
 
     public static String getBapStringFormat(int year, int month, int day, int type) {
         /**
          * Format : year-month-day-TYPE
          */
+        // Calendar의 month는 1이 부족하므로 1을 더해줌
+        month += 1;
         return year + "-" + month + "-" + day + "-" + type;
     }
 
@@ -41,7 +44,7 @@ public class BapTool {
                 mDate.setTime(mFormat.parse(Calender[index]));
 
                 int year = mDate.get(Calendar.YEAR);
-                int month = mDate.get(Calendar.MONTH) + 1;
+                int month = mDate.get(Calendar.MONTH);
                 int day = mDate.get(Calendar.DAY_OF_MONTH);
 
                 String mPrefLunchName = getBapStringFormat(year, month, day, TYPE_LUNCH);
@@ -67,10 +70,8 @@ public class BapTool {
      */
     public static restoreBapDateClass restoreBapData(Context mContext, int year, int month, int day) {
         Preference mPref = new Preference(mContext, BAP_PREFERENCE_NAME);
-        SimpleDateFormat mCalenderFormat = new SimpleDateFormat("yyyy년 MM월 dd일",
-                Locale.KOREA);
-        SimpleDateFormat mDayofWeekFormat = new SimpleDateFormat("E요일",
-                Locale.KOREA);
+        SimpleDateFormat mCalenderFormat = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA);
+        SimpleDateFormat mDayOfWeekFormat = new SimpleDateFormat("E요일", Locale.KOREA);
         Calendar mDate = Calendar.getInstance();
         mDate.set(year, month, day);
 
@@ -80,14 +81,14 @@ public class BapTool {
 
         restoreBapDateClass mData = new restoreBapDateClass();
 
-        String mPrefLunchName = getBapStringFormat(year, month + 1, day, TYPE_LUNCH);
-        String mPrefDinnerName = getBapStringFormat(year, month + 1, day, TYPE_DINNER);
+        String mPrefLunchName = getBapStringFormat(year, month, day, TYPE_LUNCH);
+        String mPrefDinnerName = getBapStringFormat(year, month, day, TYPE_DINNER);
 
         /*Log.e("mPrefLunchName", "" + mPrefLunchName);
         Log.e("mPrefDinnerName", "" + mPrefDinnerName);*/
 
         mData.Calender = mCalenderFormat.format(mDate.getTime());
-        mData.DayOfTheWeek = mDayofWeekFormat.format(mDate.getTime());
+        mData.DayOfTheWeek = mDayOfWeekFormat.format(mDate.getTime());
         mData.Lunch = mPref.getString(mPrefLunchName, null);
         mData.Dinner = mPref.getString(mPrefDinnerName, null);
 
@@ -115,5 +116,54 @@ public class BapTool {
         if (mString == null || "".equals(mString) || " ".equals(mString))
             return true;
         return false;
+    }
+
+    public static todayBapData getTodayBap(Context mContext) {
+        Calendar mCalendar = Calendar.getInstance();
+        int year = mCalendar.get(Calendar.YEAR);
+        int month = mCalendar.get(Calendar.MONTH);
+        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
+
+        restoreBapDateClass mData = BapTool.restoreBapData(mContext, year, month, day);
+        todayBapData mReturnData = new todayBapData();
+
+        if (!mData.isBlankDay) {
+            int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+
+            /**
+             * hour : 0~23
+             *
+             * 0~13 : Lunch
+             * 14~23 : Dinner
+             */
+            if (hour <= 13) {
+                mReturnData.title = mContext.getString(R.string.today_lunch);
+                mReturnData.info = (!MealLibrary.isMealCheck(mData.Lunch) ? mContext.getString(R.string.no_data_lunch) : mData.Lunch);
+            } else {
+                mReturnData.title = mContext.getString(R.string.today_dinner);
+                mReturnData.info = (!MealLibrary.isMealCheck(mData.Dinner) ? mContext.getString(R.string.no_data_dinner) : mData.Dinner);
+            }
+        } else {
+            mReturnData.title = mContext.getString(R.string.no_data_title);
+            mReturnData.info = mContext.getString(R.string.no_data_message);
+        }
+
+        return mReturnData;
+    }
+
+    public static class todayBapData {
+        public String title;
+        public String info;
+    }
+
+    public static String replaceString(String mString) {
+        String[] mTrash = {"①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩", "⑪", "⑫", "⑬"};
+        for (String e : mTrash) {
+            mString = mString.replace(e, "");
+        }
+
+        mString = mString.replace("\n", "  ");
+
+        return mString;
     }
 }

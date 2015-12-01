@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/libraries/DateTimePicker/DateTimePicker.iml" filepath="$PROJECT_DIR$/libraries/DateTimePicker/DateTimePicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/L-Dialogs/L-Dialogs.iml" filepath="$PROJECT_DIR$/libraries/L-Dialogs/L-Dialogs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/SnackBar/SnackBar.iml" filepath="$PROJECT_DIR$/libraries/SnackBar/SnackBar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WondangHighSchool.iml" filepath="$PROJECT_DIR$/WondangHighSchool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WondangHighSchoolBeta.iml" filepath="$PROJECT_DIR$/WondangHighSchoolBeta.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
     </modules>
   </component>
 </project>
-

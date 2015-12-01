@@ -11,20 +11,20 @@ import android.support.v4.app.NotificationCompat;
 import java.util.Calendar;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
-import wondang.icehs.kr.whdghks913.wondanghighschool.bap.BapActivity;
-import wondang.icehs.kr.whdghks913.wondanghighschool.bap.ProcessTask;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.ProcessTask;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
 
 /**
- * Created by 종환 on 2015-02-22.
+ * Created by whdghks913 on 2015-12-01.
  */
 public class updateService extends Service {
     Calendar mCalendar;
     Preference mPref;
     BapDownloadTask mProcessTask;
 
-    boolean showNotifi;
+    boolean showNotification;
     boolean onlyWIFI;
 
     private final int WIFI_ERROR = -1;
@@ -41,14 +41,14 @@ public class updateService extends Service {
 
         mCalendar = Calendar.getInstance();
         mPref = new Preference(getApplicationContext());
-        showNotifi = mPref.getBoolean("updateNotifi", false);
+        showNotification = mPref.getBoolean("updateNotifi", false);
         onlyWIFI = mPref.getBoolean("updateWiFi", true);
 
         if (Tools.isNetwork(getApplicationContext())) {
             // 네트워크 연결됨
             if (onlyWIFI && !Tools.isWifi(getApplicationContext())) {
                 // 와이파이에서만 업데이트 && 와이파이 연결안됨
-                if (showNotifi) {
+                if (showNotification) {
                     // 상단바 알림
                     updateAlarm updateAlarm = new updateAlarm(this);
                     updateAlarm.wifiOFF();
@@ -66,7 +66,7 @@ public class updateService extends Service {
 
         } else {
             // 네트워크 연결 안됨
-            if (showNotifi) {
+            if (showNotification) {
                 // 상단바 알림
                 updateAlarm updateAlarm = new updateAlarm(this);
                 updateAlarm.wifiOFF();
@@ -113,14 +113,14 @@ public class updateService extends Service {
 
             if (result == -1l) {
                 // 급식 다운로드 실패
-                if (showNotifi)
+                if (showNotification)
                     mNotification(GET_ERROR);
                 stopSelf();
                 return;
             }
 
             // 급식 다운로드 성공
-            if (showNotifi)
+            if (showNotification)
                 mNotification(SUCCESS);
             stopSelf();
         }

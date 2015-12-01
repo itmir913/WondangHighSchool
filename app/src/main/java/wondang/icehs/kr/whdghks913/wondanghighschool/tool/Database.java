@@ -6,29 +6,43 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.io.File;
 
+/**
+ * Created by whdghks913 on 2015-02-23.
+ */
 public class Database {
-    private SQLiteDatabase mSQDB;
+    private SQLiteDatabase mDatabase;
     private ContentValues recordValues;
 
     /**
-     * 데이터베이트가 없으면 만들고, 있으면 엽니다 또한 db파일을 만들때 table까지 함께 만듭니다
+     * 데이터베이스를 엽니다.
      *
      * @param path
-     *            /sdcard/database/db.db와 같이 완전한 풀 경로
+     * @param dbName
      */
-    public void openOrCreateDatabase(String path, String dbName,
-                                     String tableName, String Column) {
+    public void openDatabase(String path, String dbName) {
+        try {
+            if (mDatabase == null)
+                mDatabase = SQLiteDatabase.openDatabase(path + dbName, null, SQLiteDatabase.OPEN_READWRITE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 데이터베이스가 없으면 만들고, 있으면 엽니다 또한 db파일을 만들때 table까지 함께 만듭니다
+     *
+     * @param path /sdcard/database/와 같이 완전한 풀 경로
+     */
+    public void openOrCreateDatabase(String path, String dbName, String tableName, String Column) {
         try {
             if (new File(path + dbName).exists()) {
-                mSQDB = SQLiteDatabase.openDatabase(path + dbName, null,
-                        SQLiteDatabase.OPEN_READWRITE);
+                mDatabase = SQLiteDatabase.openDatabase(path + dbName, null, SQLiteDatabase.OPEN_READWRITE);
             } else {
                 File mFolder = new File(path);
                 if (!mFolder.exists())
                     mFolder.mkdirs();
 
-                mSQDB = SQLiteDatabase
-                        .openOrCreateDatabase(path + dbName, null);
+                mDatabase = SQLiteDatabase.openOrCreateDatabase(path + dbName, null);
             }
             createTable(tableName, Column);
         } catch (Exception e) {
@@ -38,21 +52,17 @@ public class Database {
 
     /**
      * table을 만듭니다
-     *
      * openOrCreateDatabase메소드에서 파일이 없을때 테이블도 함께 만듭니다.
-     *
      * 그러므로 따로 table을 추가할때 말고는 사용하지 마세요
      *
-     * @param tableName
-     *            table의 이름을 입력합니다
-     * @param Column
-     *            만들 column을 입력합니다 "title text, data integer"
+     * @param tableName table의 이름을 입력합니다
+     * @param Column    만들 column을 입력합니다 "title text, data integer"
      */
     public void createTable(String tableName, String Column) {
         try {
             String CREATE_SQL = "create table if not exists " + tableName + "("
                     + " _id integer PRIMARY KEY autoincrement, " + Column + ")";
-            mSQDB.execSQL(CREATE_SQL);
+            mDatabase.execSQL(CREATE_SQL);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,7 +71,7 @@ public class Database {
     public void removeTable(String tableName) {
         try {
             String DROP_SQL = "drop table if exists " + tableName;
-            mSQDB.execSQL(DROP_SQL);
+            mDatabase.execSQL(DROP_SQL);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,7 +79,6 @@ public class Database {
 
     /**
      * 추가할 데이터를 입력하세요
-     *
      * 한번에 한 key당 한개의 values를 입력할수 있으며 commit후 적용됩니다
      */
     public Database addData(String key, boolean value) {
@@ -134,7 +143,7 @@ public class Database {
 
     public void commit(String tableName) {
         try {
-            mSQDB.insert(tableName, null, recordValues);
+            mDatabase.insert(tableName, null, recordValues);
             recordValues = null;
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,18 +151,41 @@ public class Database {
     }
 
     /**
-     * 데이터를 반환할때 사용합니다
+     * update TableName set MyName=Mir where age=18
      *
+     * @param tableName
+     * @param key
+     * @param value
+     */
+    public void update(String tableName, String key, String value) {
+        try {
+            String UpdateSQL = "update " + tableName + " set " + key + "='" + value + "'";
+            mDatabase.execSQL(UpdateSQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(String tableName, String key, String value, String checkKey, String checkValue) {
+        try {
+            String UpdateSQL = "update " + tableName + " set " + key + "='" + value + "' where " + checkKey + "='" + checkValue + "'";
+            mDatabase.execSQL(UpdateSQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 데이터를 반환할때 사용합니다
      * Cursor를 반환하며 더 정확한 데이터 추출은 아래 Example을 확인하세요
      *
      * @param tableName
-     * @param Column
-     *            table만들때 입력한거 "title, data"
+     * @param Column    table만들때 입력한거 "title, data"
      * @return
      */
     public Cursor getData(String tableName, String Column) {
         String SQL = "select " + Column + " from " + tableName;
-        Cursor mCursor = mSQDB.rawQuery(SQL, null);
+        Cursor mCursor = mDatabase.rawQuery(SQL, null);
 
         return mCursor;
 
@@ -169,14 +201,14 @@ public class Database {
 
     public Cursor getData(String tableName) {
         String SQL = "select * from " + tableName;
-        Cursor mCursor = mSQDB.rawQuery(SQL, null);
+        Cursor mCursor = mDatabase.rawQuery(SQL, null);
 
         return mCursor;
     }
 
     public Cursor getLastData(String tableName) {
         String SQL = "select * from " + tableName;
-        Cursor mCursor = mSQDB.rawQuery(SQL, null);
+        Cursor mCursor = mDatabase.rawQuery(SQL, null);
 
         mCursor.moveToLast();
 
@@ -185,11 +217,8 @@ public class Database {
 
     /**
      * db에서 데이터를 삭제하기 위한 메소드
-     *
      * checkKey와 checkValue는 중복 데이터가 있을경우 선택 삭제가 가능하기 위해 구현
-     *
      * checkKey = "    _id='2'      "
-     *
      * exam) mData.remove("TableTable", "title", "HIHI", "_id='5'");
      *
      * @param tableName
@@ -198,71 +227,71 @@ public class Database {
      * @return
      */
     public boolean remove(String tableName, String key, boolean value) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'", null) > 0;
+        return mDatabase.delete(tableName, key + "= '" + value + "'", null) > 0;
     }
 
     public boolean remove(String tableName, String key, boolean value,
                           String checkKey) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'" + " and "
+        return mDatabase.delete(tableName, key + "= '" + value + "'" + " and "
                 + checkKey, null) > 0;
     }
 
     public boolean remove(String tableName, String key, int value) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'", null) > 0;
+        return mDatabase.delete(tableName, key + "= '" + value + "'", null) > 0;
     }
 
     public boolean remove(String tableName, String key, int value,
                           String checkKey) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'" + " and "
+        return mDatabase.delete(tableName, key + "= '" + value + "'" + " and "
                 + checkKey, null) > 0;
     }
 
     public boolean remove(String tableName, String key, long value) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'", null) > 0;
+        return mDatabase.delete(tableName, key + "= '" + value + "'", null) > 0;
     }
 
     public boolean remove(String tableName, String key, long value,
                           String checkKey) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'" + " and "
+        return mDatabase.delete(tableName, key + "= '" + value + "'" + " and "
                 + checkKey, null) > 0;
     }
 
     public boolean remove(String tableName, String key, float value) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'", null) > 0;
+        return mDatabase.delete(tableName, key + "= '" + value + "'", null) > 0;
     }
 
     public boolean remove(String tableName, String key, float value,
                           String checkKey) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'" + " and "
+        return mDatabase.delete(tableName, key + "= '" + value + "'" + " and "
                 + checkKey, null) > 0;
     }
 
     public boolean remove(String tableName, String key, double value) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'", null) > 0;
+        return mDatabase.delete(tableName, key + "= '" + value + "'", null) > 0;
     }
 
     public boolean remove(String tableName, String key, double value,
                           String checkKey) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'" + " and "
+        return mDatabase.delete(tableName, key + "= '" + value + "'" + " and "
                 + checkKey, null) > 0;
     }
 
     public boolean remove(String tableName, String key, String value) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'", null) > 0;
+        return mDatabase.delete(tableName, key + "= '" + value + "'", null) > 0;
     }
 
     public boolean remove(String tableName, String key, String value,
                           String checkKey) {
-        return mSQDB.delete(tableName, key + "= '" + value + "'" + " and "
+        return mDatabase.delete(tableName, key + "= '" + value + "'" + " and "
                 + checkKey, null) > 0;
     }
 
     public SQLiteDatabase getDatabase() {
-        return mSQDB;
+        return mDatabase;
     }
 
     public void release() {
         SQLiteDatabase.releaseMemory();
-        mSQDB.close();
+        mDatabase.close();
     }
 }
