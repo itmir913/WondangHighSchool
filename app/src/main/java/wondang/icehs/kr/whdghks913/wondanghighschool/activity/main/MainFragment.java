@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable.TimeTableActivity;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.userinfo.UserInfoActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.RecyclerItemClickListener;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
@@ -61,6 +62,9 @@ public class MainFragment extends Fragment {
                             break;
                         case 2:
                             break;
+                        case 3:
+                            startActivity(new Intent(getActivity(), UserInfoActivity.class));
+                            break;
                     }
                 }
             }
@@ -86,14 +90,6 @@ public class MainFragment extends Fragment {
                     mTimeTableData.info);
         } else {
             // DetailedView
-            mAdapter.addItem(R.drawable.ic_launcher_big,
-                    "업데이트 할 예정",
-                    "급식 위젯 + 시간표 위젯 한번에 보기\n" +
-                            "급식 영양 성분 그래프로 보여주기\n" +
-                            "오늘 급식 ★★★★☆ 평가하기\n" +
-                            "방명록, 학생회에 건의하기\n" +
-                            "버스 도착 정보 띄우기\n" +
-                            "학교 일정 온라인화");
             mAdapter.addItem(R.drawable.calendar,
                     getString(R.string.title_activity_schedule),
                     getString(R.string.message_activity_schedule));
@@ -103,7 +99,7 @@ public class MainFragment extends Fragment {
             mAdapter.addItem(R.drawable.ic_launcher_big,
                     getString(R.string.title_activity_school_info),
                     getString(R.string.message_activity_school_info));
-            mAdapter.addItem(R.drawable.ic_launcher_big,
+            mAdapter.addItem(android.R.drawable.ic_menu_info_details,
                     getString(R.string.title_activity_user_info),
                     getString(R.string.message_activity_user_info));
         }

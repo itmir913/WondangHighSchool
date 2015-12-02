@@ -42,6 +42,10 @@
             android:name=".activity.userinfo.UserInfoActivity"
             android:label="@string/title_activity_user_info"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.notice.NoticeActivity"
+            android:label="@string/title_activity_notice"
+            android:theme="@style/AppTheme" />
 
         <!-- AutoUpdate -->
         <receiver
