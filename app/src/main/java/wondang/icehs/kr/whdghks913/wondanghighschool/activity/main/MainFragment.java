@@ -88,10 +88,7 @@ public class MainFragment extends Fragment {
             // DetailedView
             mAdapter.addItem(R.drawable.ic_launcher_big,
                     "업데이트 할 예정",
-                    "앱 디자인 다시하기\n" +
-                            "위젯 디자인 다시하기\n" +
-                            "급식 위젯 + 시간표 위젯 한번에 보기\n" +
-                            "시간표 인터넷으로 바로 업데이트하기\n" +
+                    "급식 위젯 + 시간표 위젯 한번에 보기\n" +
                             "급식 영양 성분 그래프로 보여주기\n" +
                             "오늘 급식 ★★★★☆ 평가하기\n" +
                             "방명록, 학생회에 건의하기\n" +

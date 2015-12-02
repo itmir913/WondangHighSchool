@@ -44,7 +44,7 @@ public class updateService extends Service {
         showNotification = mPref.getBoolean("updateNotifi", false);
         onlyWIFI = mPref.getBoolean("updateWiFi", true);
 
-        if (Tools.isNetwork(getApplicationContext())) {
+        if (Tools.isOnline(getApplicationContext())) {
             // 네트워크 연결됨
             if (onlyWIFI && !Tools.isWifi(getApplicationContext())) {
                 // 와이파이에서만 업데이트 && 와이파이 연결안됨

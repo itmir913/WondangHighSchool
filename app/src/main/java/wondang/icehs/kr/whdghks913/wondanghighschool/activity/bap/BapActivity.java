@@ -3,6 +3,7 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -95,7 +96,7 @@ public class BapActivity extends AppCompatActivity {
     }
 
     private void getBapList(boolean isUpdate) {
-        boolean isNetwork = Tools.isNetwork(this);
+        boolean isNetwork = Tools.isOnline(this);
 
         if (isNetwork) {
             mAdapter.clearData();

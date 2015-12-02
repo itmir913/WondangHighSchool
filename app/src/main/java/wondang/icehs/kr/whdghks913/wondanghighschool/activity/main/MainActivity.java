@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        android.content.res.Resources mRes = getResources();
-
         Adapter mAdapter = new Adapter(getSupportFragmentManager());
 
         mAdapter.addFragment(getString(R.string.activity_main_fragment_simple), MainFragment.getInstance(1));
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mAdapter);
     }
 
-    static class Adapter extends FragmentPagerAdapter {
+    class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 

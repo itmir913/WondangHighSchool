@@ -37,7 +37,7 @@ public class BapWidget extends AppWidgetProvider {
 
         if (mData.isBlankDay) {
             // 데이터 없음
-            if (Tools.isNetwork(mContext)) {
+            if (Tools.isOnline(mContext)) {
                 // Only Wifi && Not Wifi
                 if (new Preference(mContext).getBoolean("updateWiFi", true) && !Tools.isWifi(mContext)) {
                     mViews.setTextViewText(R.id.mLunch, mContext.getString(R.string.widget_no_data));
@@ -109,7 +109,7 @@ public class BapWidget extends AppWidgetProvider {
 
         if (mData.isBlankDay) {
             // 데이터 없음
-            if (Tools.isNetwork(mContext)) {
+            if (Tools.isOnline(mContext)) {
                 // Only Wifi && Not Wifi
                 if (new Preference(mContext).getBoolean("updateWiFi", true) && !Tools.isWifi(mContext)) {
                     mViews.setTextViewText(R.id.mLunch, mContext.getString(R.string.widget_no_data));

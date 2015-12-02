@@ -31,6 +31,8 @@
     <string name="not_go_to_school">오늘은 시간표가 없습니다.</string>
     <string name="not_exists_data">데이터가 없습니다.</string>
     <string name="timetable_title">%1$d학년 %2$d반 시간표</string>
+    <string name="no_time_table_db_title">시간표 DB 없음</string>
+    <string name="no_time_table_db_message">시간표 DB가 없습니다, 다운로드 하시겠습니까?</string>
     <string name="action_reset_mygrade">학급 정보 재설정</string>
     <string name="action_share_timetable">시간표 공유</string>
     <string name="action_share_timetable_msg">%1$s 시간표
@@ -40,6 +42,7 @@
     <string name="action_share_day">공유할 요일 선택</string>
     <string name="I_do_not_know_the_error_title">알수없는 오류 발생</string>
     <string name="I_do_not_know_the_error_message">오류가 발생하였습니다..</string>
+    <string name="action_download_db">DB 업데이트</string>
     <!-- 설정 -->
     <string name="title_activity_settings">설정</string>
     <!-- 일정 -->

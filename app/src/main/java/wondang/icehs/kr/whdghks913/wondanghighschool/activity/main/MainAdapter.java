@@ -2,6 +2,7 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.activity.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import wondang.icehs.kr.whdghks913.wondanghighschool.R;
  * Created by whdghks913 on 2015-11-30.
  */
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
-    //    private int mBackground;
+//    private int mBackground;
     private ArrayList<MainInfo> mValues = new ArrayList<>();
 
     public MainAdapter(Context mContext) {
