@@ -2,7 +2,6 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.activity.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import wondang.icehs.kr.whdghks913.wondanghighschool.R;
  * Created by whdghks913 on 2015-11-30.
  */
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
-//    private int mBackground;
+    //    private int mBackground;
     private ArrayList<MainInfo> mValues = new ArrayList<>();
 
     public MainAdapter(Context mContext) {
@@ -36,6 +35,19 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         addInfo.mTitle = mTitle;
         addInfo.mText = mText;
         addInfo.isSimple = false;
+        addInfo.isSimpleButDetailedLayout = false;
+
+        mValues.add(addInfo);
+    }
+
+    public void addItem(int imageId, String mTitle, String mText, boolean isSimple) {
+        MainInfo addInfo = new MainInfo();
+
+        addInfo.imageId = imageId;
+        addInfo.mTitle = mTitle;
+        addInfo.mText = mText;
+        addInfo.isSimple = true;
+        addInfo.isSimpleButDetailedLayout = isSimple;
 
         mValues.add(addInfo);
     }
@@ -49,6 +61,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         addInfo.mSimpleTitle = mSimpleTitle;
         addInfo.mSimpleText = mSimpleText;
         addInfo.isSimple = true;
+        addInfo.isSimpleButDetailedLayout = false;
 
         mValues.add(addInfo);
     }
@@ -68,7 +81,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         holder.mTitle.setText(mInfo.mTitle);
         holder.mText.setText(mInfo.mText);
 
-        if (mInfo.isSimple) {
+        if (mInfo.isSimple && !(mInfo.isSimpleButDetailedLayout)) {
             holder.mSimpleLayout.setVisibility(View.VISIBLE);
             holder.mSimpleTitle.setText(mInfo.mSimpleTitle);
             holder.mSimpleText.setText(mInfo.mSimpleText);
@@ -119,6 +132,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     public class MainInfo {
         public boolean isSimple;
+        public boolean isSimpleButDetailedLayout = false;
         public int imageId;
         public String mTitle;
         public String mText;

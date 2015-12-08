@@ -39,4 +39,9 @@
         <item>-1</item>
     </string-array>
 
+    <string-array name="item_bap_type">
+        <item>점심</item>
+        <item>저녁</item>
+    </string-array>
+
 </resources>

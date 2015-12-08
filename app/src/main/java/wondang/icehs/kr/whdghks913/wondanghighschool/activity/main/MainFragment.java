@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable.TimeTableActivity;
-import wondang.icehs.kr.whdghks913.wondanghighschool.activity.userinfo.UserInfoActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.RecyclerItemClickListener;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
 
@@ -62,9 +62,6 @@ public class MainFragment extends Fragment {
                             break;
                         case 2:
                             break;
-                        case 3:
-                            startActivity(new Intent(getActivity(), UserInfoActivity.class));
-                            break;
                     }
                 }
             }
@@ -72,22 +69,35 @@ public class MainFragment extends Fragment {
 
         Bundle args = getArguments();
         int code = args.getInt("code");
+        Preference mPref = new Preference(getActivity());
 
         if (code == 1) {
             // SimpleView
-            BapTool.todayBapData mBapData = BapTool.getTodayBap(getActivity());
-            mAdapter.addItem(R.drawable.rice,
-                    getString(R.string.title_activity_bap),
-                    getString(R.string.message_activity_bap),
-                    mBapData.title,
-                    mBapData.info);
+            if (mPref.getBoolean("simpleShowBap", true)) {
+                BapTool.todayBapData mBapData = BapTool.getTodayBap(getActivity());
+                mAdapter.addItem(R.drawable.rice,
+                        getString(R.string.title_activity_bap),
+                        getString(R.string.message_activity_bap),
+                        mBapData.title,
+                        mBapData.info);
+            } else {
+                mAdapter.addItem(R.drawable.rice,
+                        getString(R.string.title_activity_bap),
+                        getString(R.string.message_activity_bap), true);
+            }
 
-            TimeTableTool.todayTimeTableData mTimeTableData = TimeTableTool.getTodayTimeTable(getActivity());
-            mAdapter.addItem(R.drawable.timetable,
-                    getString(R.string.title_activity_time_table),
-                    getString(R.string.message_activity_time_table),
-                    mTimeTableData.title,
-                    mTimeTableData.info);
+            if (mPref.getBoolean("simpleShowTimeTable", true)) {
+                TimeTableTool.todayTimeTableData mTimeTableData = TimeTableTool.getTodayTimeTable(getActivity());
+                mAdapter.addItem(R.drawable.timetable,
+                        getString(R.string.title_activity_time_table),
+                        getString(R.string.message_activity_time_table),
+                        mTimeTableData.title,
+                        mTimeTableData.info);
+            } else {
+                mAdapter.addItem(R.drawable.timetable,
+                        getString(R.string.title_activity_time_table),
+                        getString(R.string.message_activity_time_table), true);
+            }
         } else {
             // DetailedView
             mAdapter.addItem(R.drawable.calendar,
@@ -99,9 +109,6 @@ public class MainFragment extends Fragment {
             mAdapter.addItem(R.drawable.ic_launcher_big,
                     getString(R.string.title_activity_school_info),
                     getString(R.string.message_activity_school_info));
-            mAdapter.addItem(android.R.drawable.ic_menu_info_details,
-                    getString(R.string.title_activity_user_info),
-                    getString(R.string.message_activity_user_info));
         }
 
         return recyclerView;

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="간편 보기">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="simpleShowBap"
+            android:summary="간편 보기의 급식을 활성화 합니다."
+            android:title="급식 간편 보기 활성화" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="simpleShowTimeTable"
+            android:summary="간편 보기의 시간표를 활성화 합니다."
+            android:title="시간표 간편 보기 활성화" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="급식 업데이트">
         <CheckBoxPreference
             android:defaultValue="false"
@@ -32,6 +45,7 @@
             android:summary="토,일 업데이트시 전원이 꺼져있으면 자동 업데이트가 이루어 지지 않을수 있습니다\n업데이트는 AM 1:00에 이루어 집니다"
             android:title="업데이트 안내" />
     </PreferenceCategory>
+
     <PreferenceCategory android:title="어플 정보">
         <Preference
             android:key="openSource"

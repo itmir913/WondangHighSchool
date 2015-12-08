@@ -1,15 +1,18 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.star.BapStarActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 
 /**
@@ -20,6 +23,7 @@ class BapViewHolder {
     public TextView mDayOfTheWeek;
     public TextView mLunch;
     public TextView mDinner;
+    public LinearLayout starLayout;
 }
 
 class BapListData {
@@ -27,11 +31,27 @@ class BapListData {
     public String mDayOfTheWeek;
     public String mLunch;
     public String mDinner;
+    public boolean isToday;
 }
 
 public class BapAdapter extends BaseAdapter {
     private Context mContext = null;
     private ArrayList<BapListData> mListData = new ArrayList<BapListData>();
+
+    final View.OnClickListener mStarListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent mIntent = new Intent(mContext, BapStarActivity.class);
+
+            if (v.getId() == R.id.giveStar) {
+                mIntent.putExtra("starType", 1);
+            } else {
+                mIntent.putExtra("starType", 2);
+            }
+
+            mContext.startActivity(mIntent);
+        }
+    };
 
     public BapAdapter(Context mContext) {
         super();
@@ -39,12 +59,13 @@ public class BapAdapter extends BaseAdapter {
         this.mContext = mContext;
     }
 
-    public void addItem(String mCalender, String mDayOfTheWeek, String mLunch, String mDinner) {
+    public void addItem(String mCalender, String mDayOfTheWeek, String mLunch, String mDinner, boolean isToday) {
         BapListData addItemInfo = new BapListData();
         addItemInfo.mCalender = mCalender;
         addItemInfo.mDayOfTheWeek = mDayOfTheWeek;
         addItemInfo.mLunch = mLunch;
         addItemInfo.mDinner = mDinner;
+        addItemInfo.isToday = isToday;
 
         mListData.add(addItemInfo);
     }
@@ -82,6 +103,7 @@ public class BapAdapter extends BaseAdapter {
             mHolder.mDayOfTheWeek = (TextView) convertView.findViewById(R.id.mDayOfTheWeek);
             mHolder.mLunch = (TextView) convertView.findViewById(R.id.mLunch);
             mHolder.mDinner = (TextView) convertView.findViewById(R.id.mDinner);
+            mHolder.starLayout = (LinearLayout) convertView.findViewById(R.id.starLayout);
 
             convertView.setTag(mHolder);
         } else {
@@ -104,6 +126,14 @@ public class BapAdapter extends BaseAdapter {
         mHolder.mDayOfTheWeek.setText(mDayOfTheWeek);
         mHolder.mLunch.setText(mLunch);
         mHolder.mDinner.setText(mDinner);
+
+        if (mData.isToday) {
+            mHolder.starLayout.setVisibility(View.VISIBLE);
+            convertView.findViewById(R.id.giveStar).setOnClickListener(mStarListener);
+            convertView.findViewById(R.id.showStar).setOnClickListener(mStarListener);
+        } else {
+            mHolder.starLayout.setVisibility(View.GONE);
+        }
 
         return convertView;
     }

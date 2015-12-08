@@ -3,7 +3,6 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -105,6 +104,11 @@ public class BapActivity extends AppCompatActivity {
 
         getCalendarInstance(false);
 
+        final Calendar mToday = Calendar.getInstance();
+        final int TodayYear = mToday.get(Calendar.YEAR);
+        final int TodayMonth = mToday.get(Calendar.MONTH);
+        final int TodayDay = mToday.get(Calendar.DAY_OF_MONTH);
+
         // 이번주 월요일 날짜를 가져온다
         mCalendar.add(Calendar.DATE, 2 - DAY_OF_WEEK);
 
@@ -138,7 +142,13 @@ public class BapActivity extends AppCompatActivity {
                 return;
             }
 
-            mAdapter.addItem(mData.Calender, mData.DayOfTheWeek, mData.Lunch, mData.Dinner);
+            // if day equals today
+            if ((year == TodayYear) && (month == TodayMonth) && (day == TodayDay)) {
+                mAdapter.addItem(mData.Calender, mData.DayOfTheWeek, mData.Lunch, mData.Dinner, true);
+            } else {
+                mAdapter.addItem(mData.Calender, mData.DayOfTheWeek, mData.Lunch, mData.Dinner, false);
+            }
+
             mCalendar.add(Calendar.DATE, 1);
         }
 
@@ -244,7 +254,7 @@ public class BapActivity extends AppCompatActivity {
                 mDialog.dismiss();
 
             if (result == -1) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext(), R.style.AppCompatErrorAlertDialogStyle);
+                AlertDialog.Builder builder = new AlertDialog.Builder(BapActivity.this, R.style.AppCompatErrorAlertDialogStyle);
                 builder.setTitle(R.string.I_do_not_know_the_error_title);
                 builder.setMessage(R.string.I_do_not_know_the_error_message);
                 builder.setPositiveButton(android.R.string.ok, null);
