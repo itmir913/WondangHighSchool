@@ -28,7 +28,8 @@
     <string name="message_activity_time_table">시간표를 확인합니다.</string>
     <string name="today_timetable">%1$s 시간표</string>
     <string name="no_setting_my_grade">학급 정보가 없습니다</string>
-    <string name="not_go_to_school">오늘은 시간표가 없습니다.</string>
+    <string name="not_go_to_school_title">시간표 없음</string>
+    <string name="not_go_to_school_message">오늘은 시간표가 없습니다.</string>
     <string name="not_exists_data">데이터가 없습니다.</string>
     <string name="timetable_title">%1$d학년 %2$d반 시간표</string>
     <string name="no_time_table_db_title">시간표 DB 없음</string>

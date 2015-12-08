@@ -119,17 +119,18 @@ public class TimeTableTool {
         int mGrade = mPref.getInt("myGrade", -1);
         int mClass = mPref.getInt("myClass", -1);
 
+        if (DayOfWeek > 1 && DayOfWeek < 7) {
+            DayOfWeek -= 2;
+        } else {
+            mData.title = mContext.getString(R.string.not_go_to_school_title);
+            mData.info = mContext.getString(R.string.not_go_to_school_message);
+            return mData;
+        }
+
         mData.title = String.format(mContext.getString(R.string.today_timetable), TimeTableTool.mDisplayName[DayOfWeek - 2]);
 
         if (mGrade == -1 || mClass == -1) {
             mData.info = mContext.getString(R.string.no_setting_my_grade);
-            return mData;
-        }
-
-        if (DayOfWeek > 1 && DayOfWeek < 7) {
-            DayOfWeek -= 2;
-        } else {
-            mData.info = mContext.getString(R.string.not_go_to_school);
             return mData;
         }
 

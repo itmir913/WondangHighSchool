@@ -84,6 +84,7 @@ public class BapStarActivity extends AppCompatActivity {
         int position = mGiveStarType.getSelectedItemPosition();
         float rate = mPostRatingBar.getRating();
 
+        // TODO 하루에 한번만 별점 전송 할 수 있도록 설정
         (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString(), "my");
     }
 
