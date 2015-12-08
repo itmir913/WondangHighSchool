@@ -27,7 +27,6 @@
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <Spinner
@@ -39,12 +38,12 @@
 
                 <RatingBar
                     android:id="@+id/mPostRatingBar"
-                    android:layout_width="match_parent"
+                    style="?android:attr/ratingBarStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:isIndicator="false"
-                    android:numStars="5"
                     android:rating="5"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -71,7 +70,6 @@
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <Spinner
@@ -82,13 +80,13 @@
 
                 <RatingBar
                     android:id="@+id/mGetRatingStar"
-                    android:layout_width="match_parent"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:isIndicator="true"
-                    android:numStars="5"
                     android:rating="5"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
 
             </LinearLayout>
 

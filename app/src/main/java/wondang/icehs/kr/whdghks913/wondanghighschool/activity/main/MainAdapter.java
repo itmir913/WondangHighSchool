@@ -94,12 +94,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
                 .fitCenter()
                 .into(holder.mCircleImageView);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO
-            }
-        });
+//        holder.mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // TODO
+//            }
+//        });
     }
 
     @Override
@@ -112,14 +112,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     }
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
+//        public final View mView;
         public final CircleImageView mCircleImageView;
         public final LinearLayout mSimpleLayout;
         public final TextView mTitle, mText, mSimpleTitle, mSimpleText;
 
         public MainViewHolder(View mView) {
             super(mView);
-            this.mView = mView;
+//            this.mView = mView;
 
             mCircleImageView = (CircleImageView) mView.findViewById(R.id.mCircleImageView);
             mTitle = (TextView) mView.findViewById(R.id.mTitle);

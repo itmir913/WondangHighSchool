@@ -187,5 +187,9 @@
     <string name="user_info_class_up_success">관리자 인증 성공</string>
     <string name="title_activity_notice">공지사항</string>
     <string name="title_activity_bap_star">급식 별점</string>
+    <string name="post_bap_star_title">급식 별점 전송</string>
+    <string name="post_bap_star_posting">급식 별점 전송중</string>
+    <string name="post_bap_star_success">급식 별점 전송을 성공했습니다!</string>
+    <string name="post_bap_star_failed">급식 별점 전송에 실패했습니다!</string>
 
 </resources>
