@@ -93,6 +93,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="?attr/colorPrimary"
+                    android:focusable="false"
                     android:text="별점 주기"
                     android:textAllCaps="true"
                     android:textColor="@color/white" />
@@ -105,6 +106,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="?attr/colorPrimary"
+                    android:focusable="false"
                     android:text="별점 확인"
                     android:textAllCaps="true"
                     android:textColor="@color/white" />

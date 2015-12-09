@@ -18,6 +18,8 @@
     <string name="no_data_message">정보가 없습니다.</string>
     <string name="no_network_title">인터넷 연결 안됨</string>
     <string name="no_network_msg">인터넷 연결이 안돼서 데이터를 다운로드 할 수 없습니다</string>
+    <string name="no_wifi_title">데이터 네트워크 사용 안내</string>
+    <string name="no_wifi_msg">데이터 네트워크를 사용하시겠습니까?</string>
     <string name="shareBap_title">급식 공유하기</string>
     <string name="shareBap_message_msg">%1$s의 급식 목록
 \n\n점심 : %2$s
@@ -188,6 +190,8 @@
     <string name="user_info_class_up_success">관리자 인증 성공</string>
     <string name="title_activity_notice">공지사항</string>
     <string name="title_activity_bap_star">급식 별점</string>
+    <string name="bap_star_once_title">별점 전송 제한</string>
+    <string name="bap_star_once_message">급식당 하루에 한번만 별점을 등록할 수 있습니다.</string>
     <string name="post_bap_star_title">급식 별점 전송</string>
     <string name="post_bap_star_posting">급식 별점 전송중</string>
     <string name="post_bap_star_success">급식 별점 전송을 성공했습니다!</string>

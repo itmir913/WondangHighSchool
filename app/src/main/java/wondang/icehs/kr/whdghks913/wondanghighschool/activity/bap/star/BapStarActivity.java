@@ -1,7 +1,9 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.star;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -9,8 +11,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 
@@ -22,17 +29,35 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.File;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Vector;
 
+import itmir.tistory.com.spreadsheets.GoogleSheetTask;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Database;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
 
 public class BapStarActivity extends AppCompatActivity {
+    public static final String StarRateDBName = "RiceStarRate.db";
+    public static final String StarRateTableName = "RateInfo";
+
     Spinner mGiveStarType;
     RatingBar mPostRatingBar;
     EditText mBapReview;
 
     Spinner mDateSpinner;
-    RatingBar mGetRatingStar;
+    RatingBar mLunchRatingStar, mDinnerRatingStar;
+    ListView mLunchListView, mDinnerListView;
+    BapStarShowAdapter mLunchAdapter, mDinnerAdapter;
+    Preference mPref;
+    int year, month, day;
+
+    ArrayList<String> mTimeData = new ArrayList<>();
 
     ProgressDialog mDialog;
 
@@ -69,40 +94,66 @@ public class BapStarActivity extends AppCompatActivity {
             mGiveStarType = (Spinner) findViewById(R.id.mGiveStarType);
             mPostRatingBar = (RatingBar) findViewById(R.id.mPostRatingBar);
             mBapReview = (EditText) findViewById(R.id.mBapReview);
+
         } else if (starType == 2) {
             giveStarLayout.setVisibility(View.GONE);
             showStarLayout.setVisibility(View.VISIBLE);
 
             mDateSpinner = (Spinner) findViewById(R.id.mDateSpinner);
-            mGetRatingStar = (RatingBar) findViewById(R.id.mGetRatingStar);
-//            mGetRatingStar.setRating();
+            mLunchRatingStar = (RatingBar) findViewById(R.id.mLunchRatingStar);
+            mDinnerRatingStar = (RatingBar) findViewById(R.id.mDinnerRatingStar);
+            mLunchListView = (ListView) findViewById(R.id.mLunchListView);
+            mDinnerListView = (ListView) findViewById(R.id.mDinnerListView);
+            mLunchAdapter = new BapStarShowAdapter(this);
+            mDinnerAdapter = new BapStarShowAdapter(this);
+            Calendar mCalendar = Calendar.getInstance();
+            year = mCalendar.get(Calendar.YEAR);
+            month = mCalendar.get(Calendar.MONTH);
+            day = mCalendar.get(Calendar.DAY_OF_MONTH);
+
+            mLunchListView.setAdapter(mLunchAdapter);
+            mDinnerListView.setAdapter(mDinnerAdapter);
+
+            showRiceStar();
         }
     }
 
     public void postStar(View v) {
         // 0 : Lunch, 1 : Dinner
-        int position = mGiveStarType.getSelectedItemPosition();
-        float rate = mPostRatingBar.getRating();
+        mPref = new Preference(this);
+        String lunchKey = "Lunch_" + year + month + day;
+        String dinnerKey = "Dinner_" + year + month + day;
+        boolean lunch = mPref.getBoolean(lunchKey, true);
+        boolean dinner = mPref.getBoolean(dinnerKey, true);
 
-        // TODO 하루에 한번만 별점 전송 할 수 있도록 설정
-        (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString(), "my");
+        int position = mGiveStarType.getSelectedItemPosition();
+        if ((position == 0 && lunch) || ((position == 1 && dinner))) {
+            float rate = mPostRatingBar.getRating();
+            (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString(), "my");
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatErrorAlertDialogStyle);
+            builder.setTitle(R.string.bap_star_once_title);
+            builder.setMessage(R.string.bap_star_once_message);
+            builder.setPositiveButton(android.R.string.ok, null);
+            builder.show();
+        }
     }
 
-    private class HttpTask extends AsyncTask<String, Void, Boolean> {
+    private class HttpTask extends AsyncTask<String, Void, Integer> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
             mDialog = new ProgressDialog(BapStarActivity.this);
-            mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mDialog.setTitle(R.string.post_bap_star_posting);
-            mDialog.setCancelable(false);
+            mDialog.setIndeterminate(true);
+            mDialog.setMessage(getString(R.string.post_bap_star_posting));
+            mDialog.setCanceledOnTouchOutside(false);
             mDialog.show();
         }
 
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected Integer doInBackground(String... params) {
             try {
                 HttpPost postRequest = new HttpPost("https://script.google.com/macros/s/AKfycbwR755X_mEWKZ8LKQuQf81t5rVerzOLCg1ztZyHisNr7rB8rIo/exec");
 
@@ -138,15 +189,15 @@ public class BapStarActivity extends AppCompatActivity {
 //                }
 //                im.close();
 
-                return true;
+                return Integer.parseInt(params[0]);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            return false;
+            return -1;
         }
 
-        protected void onPostExecute(Boolean value) {
+        protected void onPostExecute(Integer value) {
             super.onPostExecute(value);
 
             if (mDialog != null) {
@@ -154,7 +205,14 @@ public class BapStarActivity extends AppCompatActivity {
                 mDialog = null;
             }
 
-            if (value) {
+            if (value == -1) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(BapStarActivity.this, R.style.AppCompatErrorAlertDialogStyle);
+                builder.setTitle(R.string.post_bap_star_title);
+                builder.setMessage(R.string.post_bap_star_failed);
+                builder.setPositiveButton(android.R.string.ok, null);
+                builder.show();
+
+            } else {
                 mBapReview.setText("");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BapStarActivity.this, R.style.AppCompatAlertDialogStyle);
@@ -162,14 +220,217 @@ public class BapStarActivity extends AppCompatActivity {
                 builder.setMessage(R.string.post_bap_star_success);
                 builder.setPositiveButton(android.R.string.ok, null);
                 builder.show();
-            } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BapStarActivity.this, R.style.AppCompatErrorAlertDialogStyle);
-                builder.setTitle(R.string.post_bap_star_title);
-                builder.setMessage(R.string.post_bap_star_failed);
-                builder.setPositiveButton(android.R.string.ok, null);
-                builder.show();
+
+                if (mPref == null)
+                    mPref = new Preference(getApplicationContext());
+                String lunchKey = "LunchStar_" + year + month + day;
+                String dinnerKey = "DinnerStar_" + year + month + day;
+                if (value == 0) {
+                    mPref.putBoolean(lunchKey, false);
+                } else {
+                    mPref.putBoolean(dinnerKey, false);
+                }
             }
         }
+    }
+
+    private void showRiceStar() {
+        if (Tools.isOnline(getApplicationContext())) {
+            if (Tools.isWifi(getApplicationContext())) {
+                getStarRateDownloadTask mTask = new getStarRateDownloadTask();
+                mTask.execute("https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=930079213&single=true");
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+                builder.setTitle(R.string.no_wifi_title);
+                builder.setMessage(R.string.no_wifi_msg);
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        offlineData();
+                    }
+                });
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getStarRateDownloadTask mTask = new getStarRateDownloadTask();
+                        mTask.execute("https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=930079213&single=true");
+                    }
+                });
+                builder.show();
+            }
+        } else {
+            offlineData();
+        }
+    }
+
+    private void offlineData() {
+        if (new File(TimeTableTool.mFilePath + StarRateDBName).exists()) {
+            showListViewDate();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(BapStarActivity.this, R.style.AppCompatErrorAlertDialogStyle);
+            builder.setTitle(R.string.no_network_title);
+            builder.setMessage(R.string.no_network_msg);
+            builder.setPositiveButton(android.R.string.ok, null);
+            builder.show();
+        }
+    }
+
+    class getStarRateDownloadTask extends GoogleSheetTask {
+        private Database mDatabase;
+        private String[] columnFirstRow;
+
+        @Override
+        public void onPreDownload() {
+            mDialog = new ProgressDialog(BapStarActivity.this);
+            mDialog.setIndeterminate(true);
+            mDialog.setMessage(getString(R.string.loading_title));
+            mDialog.setCanceledOnTouchOutside(false);
+            mDialog.show();
+
+            new File(TimeTableTool.mFilePath + StarRateDBName).delete();
+            mDatabase = new Database();
+
+            this.startRowNumber = 0;
+        }
+
+        @Override
+        public void onFinish(long result) {
+            if (mDialog != null) {
+                mDialog.dismiss();
+                mDialog = null;
+            }
+
+            if (mDatabase != null)
+                mDatabase.release();
+
+            showListViewDate();
+        }
+
+        @Override
+        public void onRow(int startRowNumber, int position, String[] row) {
+            if (startRowNumber == position) {
+                columnFirstRow = row;
+
+                StringBuilder Column = new StringBuilder();
+
+                // remove deviceId
+                for (int i = 0; i < row.length - 1; i++) {
+                    Column.append(row[i]);
+                    Column.append(" text, ");
+                }
+
+                mDatabase.openOrCreateDatabase(TimeTableTool.mFilePath, StarRateDBName, StarRateTableName, Column.substring(0, Column.length() - 2));
+            } else {
+                int length = row.length;
+                for (int i = 0; i < length - 1; i++) {
+                    mDatabase.addData(columnFirstRow[i], row[i]);
+                }
+                mDatabase.commit(StarRateTableName);
+            }
+        }
+    }
+
+    private void showListViewDate() {
+        Database mDatabase = new Database();
+        mDatabase.openDatabase(TimeTableTool.mFilePath, StarRateDBName);
+        Cursor mCursor = mDatabase.getData(StarRateTableName, "*");
+
+        for (int i = 0; i < mCursor.getCount(); i++) {
+            mCursor.moveToNext();
+
+            String date = mCursor.getString(1);
+//            String type = mCursor.getString(2);
+//            int rate = Integer.parseInt(mCursor.getString(3));
+//            String memo = mCursor.getString(4);
+
+            if (!mTimeData.contains(date)) {
+                mTimeData.add(date);
+            }
+        }
+
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mTimeData);
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mDateSpinner.setAdapter(mAdapter);
+
+        mDateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                getDatabaseData(mTimeData.get(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        mDateSpinner.setSelection(mTimeData.size() - 1);
+    }
+
+    private void getDatabaseData(String dateName) {
+        mLunchAdapter.clearData();
+        mDinnerAdapter.clearData();
+
+        Database mDatabase = new Database();
+        mDatabase.openDatabase(TimeTableTool.mFilePath, StarRateDBName);
+        Cursor mCursor = mDatabase.getData(StarRateTableName, "*");
+
+        int sumLunch = 0, sumDinner = 0;
+
+        for (int i = 0; i < mCursor.getCount(); i++) {
+            mCursor.moveToNext();
+
+            String date = mCursor.getString(1);
+            if (!date.equals(dateName))
+                continue;
+
+            String memo = mCursor.getString(4);
+            if (memo.isEmpty() || memo.length() == 0)
+                continue;
+
+            int type = Integer.parseInt(mCursor.getString(2));
+            int rate = Integer.parseInt(mCursor.getString(3));
+
+            if (type == 0) {
+                mLunchAdapter.addItem(memo);
+                sumLunch += rate;
+            } else {
+                mDinnerAdapter.addItem(memo);
+                sumDinner += rate;
+            }
+        }
+
+        try {
+            float lunch = (new BigDecimal(sumLunch)).divide(new BigDecimal(mLunchAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+            float dinner = (new BigDecimal(sumDinner)).divide(new BigDecimal(mDinnerAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+
+            mLunchRatingStar.setRating(lunch);
+            mDinnerRatingStar.setRating(dinner);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        setDynamicHeight(mLunchListView);
+        setDynamicHeight(mDinnerListView);
+    }
+
+    private void setDynamicHeight(ListView mListView) {
+        ListAdapter mListAdapter = mListView.getAdapter();
+        if (mListAdapter == null)
+            return;
+
+        int height = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(mListView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        for (int i = 0; i < mListAdapter.getCount(); i++) {
+            View listItem = mListAdapter.getView(i, null, mListView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            height += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = mListView.getLayoutParams();
+        params.height = height + (mListView.getDividerHeight() * (mListAdapter.getCount() - 1));
+        mListView.setLayoutParams(params);
+        mListView.requestLayout();
     }
 
 }

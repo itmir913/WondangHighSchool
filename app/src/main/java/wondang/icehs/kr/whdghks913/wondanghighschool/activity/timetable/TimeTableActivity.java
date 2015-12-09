@@ -131,12 +131,23 @@ public class TimeTableActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void downloadingDB(boolean isDeleteFile) {
+    public void downloadingDB(final boolean isDeleteFile) {
         if (Tools.isOnline(getApplicationContext())) {
-            if (isDeleteFile)
-                new File(TimeTableTool.mFilePath + TimeTableTool.TimeTableDBName).delete();
-            DBDownloadTask mTask = new DBDownloadTask();
-            mTask.execute(TimeTableTool.mGoogleSpreadSheetUrl);
+            if (Tools.isWifi(getApplicationContext())) {
+                downloadStart(isDeleteFile);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
+                builder.setTitle(R.string.no_wifi_title);
+                builder.setMessage(R.string.no_wifi_msg);
+                builder.setNegativeButton(android.R.string.cancel, null);
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        downloadStart(isDeleteFile);
+                    }
+                });
+                builder.show();
+            }
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatErrorAlertDialogStyle);
             builder.setTitle(R.string.no_network_title);
@@ -144,6 +155,13 @@ public class TimeTableActivity extends AppCompatActivity {
             builder.setPositiveButton(android.R.string.ok, null);
             builder.show();
         }
+    }
+
+    private void downloadStart(boolean isDeleteFile) {
+        if (isDeleteFile)
+            new File(TimeTableTool.mFilePath + TimeTableTool.TimeTableDBName).delete();
+        DBDownloadTask mTask = new DBDownloadTask();
+        mTask.execute(TimeTableTool.mGoogleSpreadSheetUrl);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -222,7 +240,7 @@ public class TimeTableActivity extends AppCompatActivity {
             if (startRowNumber == position) {
                 columnFirstRow = row;
 
-                StringBuffer Column = new StringBuffer();
+                StringBuilder Column = new StringBuilder();
 
                 for (String column : row) {
                     Column.append(column);

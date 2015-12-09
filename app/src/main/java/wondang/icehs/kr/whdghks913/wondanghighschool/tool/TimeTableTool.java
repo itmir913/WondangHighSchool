@@ -2,6 +2,7 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.tool;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Environment;
 
 import java.io.File;
 import java.util.Calendar;
@@ -15,7 +16,7 @@ public class TimeTableTool {
     public static final String TimeTableDBName = "WondangHighSchoolTimeTable.db";
     public static final String tableName = "WondangTimeTable";
 
-    //    public final static String mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WondangHS/";
+//    public final static String mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WondangHS/";
     public final static String mFilePath = "/data/data/wondang.icehs.kr.whdghks913.wondanghighschool/databases/";
     public final static String mGoogleSpreadSheetUrl = "https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=0&single=true";
 //    public final static int dbVersion = 6;

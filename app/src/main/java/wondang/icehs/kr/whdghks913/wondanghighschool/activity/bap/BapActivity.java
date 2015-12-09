@@ -208,16 +208,20 @@ public class BapActivity extends AppCompatActivity {
             return true;
 
         } else if (id == R.id.action_refresh) {
-            getCalendarInstance(false);
+            boolean isNetwork = Tools.isOnline(this);
 
-            mCalendar.add(Calendar.DATE, 2 - DAY_OF_WEEK);
+            if (isNetwork) {
+                getCalendarInstance(false);
 
-            String mPrefLunchName = BapTool.getBapStringFormat(YEAR, MONTH, DAY, BapTool.TYPE_LUNCH);
-            String mPrefDinnerName = BapTool.getBapStringFormat(YEAR, MONTH, DAY, BapTool.TYPE_DINNER);
+                mCalendar.add(Calendar.DATE, 2 - DAY_OF_WEEK);
 
-            Preference mPref = new Preference(getApplicationContext(), BapTool.BAP_PREFERENCE_NAME);
-            mPref.remove(mPrefLunchName);
-            mPref.remove(mPrefDinnerName);
+                String mPrefLunchName = BapTool.getBapStringFormat(YEAR, MONTH, DAY, BapTool.TYPE_LUNCH);
+                String mPrefDinnerName = BapTool.getBapStringFormat(YEAR, MONTH, DAY, BapTool.TYPE_DINNER);
+
+                Preference mPref = new Preference(getApplicationContext(), BapTool.BAP_PREFERENCE_NAME);
+                mPref.remove(mPrefLunchName);
+                mPref.remove(mPrefDinnerName);
+            }
 
             getBapList(true);
 

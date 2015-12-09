@@ -19,10 +19,8 @@ public class Tools {
     }
 
     public static boolean isWifi(Context mContext) {
-        ConnectivityManager manager = (ConnectivityManager) mContext
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo wifi = manager
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        ConnectivityManager manager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
         return wifi.isConnected();
     }
