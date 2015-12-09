@@ -1,6 +1,7 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.settings;
 
 
+import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 
+import itmir.tistory.com.xor.SecurityXor;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.autoupdate.updateAlarm;
 
@@ -53,9 +56,17 @@ public class SettingsActivity extends AppCompatActivity {
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.pref_settings);
 
+            boolean isAdmin = getPreferenceManager().getSharedPreferences().getBoolean("userAdmin", false);
+            if (isAdmin) {
+                Preference proUpgrade = findPreference("proUpgrade");
+                proUpgrade.setSummary(R.string.user_info_licensed);
+                proUpgrade.setEnabled(false);
+            }
+
             setOnPreferenceClick(findPreference("infoAutoUpdate"));
             setOnPreferenceClick(findPreference("openSource"));
             setOnPreferenceClick(findPreference("ChangeLog"));
+            setOnPreferenceClick(findPreference("proUpgrade"));
             setOnPreferenceChange(findPreference("autoBapUpdate"));
             setOnPreferenceChange(findPreference("updateLife"));
 
@@ -92,7 +103,28 @@ public class SettingsActivity extends AppCompatActivity {
                     builder.show();
                 } else if ("infoAutoUpdate".equals(getKey)) {
                     showNotification();
+                } else if ("proUpgrade".equals(getKey)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+                    builder.setTitle(R.string.user_info_class_up_title);
+//                    builder.setMessage(R.string.no_network_msg);
+
+                    // Set an EditText view to get user input
+                    final EditText input = new EditText(getActivity());
+                    builder.setView(input);
+
+                    builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            String value = input.getText().toString();
+                            SecurityXor securityXor = new SecurityXor();
+                            if ("Aleef^f{eM".equals(securityXor.getSecurityXor(value, 777))) {
+                                getPreferenceManager().getSharedPreferences().edit().putBoolean("userAdmin", true).commit();
+                            }
+                        }
+                    });
+                    builder.setNegativeButton(android.R.string.cancel, null);
+                    builder.show();
                 }
+
                 return true;
             }
         };

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -128,8 +129,9 @@ public class BapStarActivity extends AppCompatActivity {
 
         int position = mGiveStarType.getSelectedItemPosition();
         if ((position == 0 && lunch) || ((position == 1 && dinner))) {
+            mPref.clear();
             float rate = mPostRatingBar.getRating();
-            (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString(), "my");
+            (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString());
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatErrorAlertDialogStyle);
             builder.setTitle(R.string.bap_star_once_title);
@@ -163,7 +165,7 @@ public class BapStarActivity extends AppCompatActivity {
                 nameValue.add(new BasicNameValuePair("type", params[0]));
                 nameValue.add(new BasicNameValuePair("rate", params[1]));
                 nameValue.add(new BasicNameValuePair("memo", params[2]));
-                nameValue.add(new BasicNameValuePair("deviceId", params[3]));
+                nameValue.add(new BasicNameValuePair("deviceId", Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID)));
 
                 //웹 접속 - UTF-8으로
                 HttpEntity Entity = new UrlEncodedFormEntity(nameValue, "UTF-8");
@@ -401,14 +403,25 @@ public class BapStarActivity extends AppCompatActivity {
         }
 
         try {
-            float lunch = (new BigDecimal(sumLunch)).divide(new BigDecimal(mLunchAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
-            float dinner = (new BigDecimal(sumDinner)).divide(new BigDecimal(mDinnerAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+            if ((sumLunch != 0) && (mLunchAdapter.getCount() != 0)) {
+                float lunch = (new BigDecimal(sumLunch)).divide(new BigDecimal(mLunchAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+                mLunchRatingStar.setRating(lunch);
+            } else {
+                mLunchRatingStar.setRating(5f);
+            }
 
-            mLunchRatingStar.setRating(lunch);
-            mDinnerRatingStar.setRating(dinner);
+            if ((sumDinner != 0) && (mDinnerAdapter.getCount() != 0)) {
+                float dinner = (new BigDecimal(sumDinner)).divide(new BigDecimal(mDinnerAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+                mDinnerRatingStar.setRating(dinner);
+            } else {
+                mDinnerRatingStar.setRating(5f);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        mLunchAdapter.notifyDataSetChanged();
+        mDinnerAdapter.notifyDataSetChanged();
 
         setDynamicHeight(mLunchListView);
         setDynamicHeight(mDinnerListView);

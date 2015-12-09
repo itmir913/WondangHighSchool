@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.notice.NoticeActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable.TimeTableActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
@@ -57,10 +58,13 @@ public class MainFragment extends Fragment {
                 } else {
                     switch (position) {
                         case 0:
+                            startActivity(new Intent(getActivity(), NoticeActivity.class));
                             break;
                         case 1:
                             break;
                         case 2:
+                            break;
+                        case 3:
                             break;
                     }
                 }
@@ -100,15 +104,18 @@ public class MainFragment extends Fragment {
             }
         } else {
             // DetailedView
-            mAdapter.addItem(R.drawable.calendar,
-                    getString(R.string.title_activity_schedule),
-                    getString(R.string.message_activity_schedule));
-            mAdapter.addItem(R.drawable.clock,
-                    getString(R.string.title_activity_today_list),
-                    getString(R.string.message_activity_today_list));
-            mAdapter.addItem(R.drawable.ic_launcher_big,
-                    getString(R.string.title_activity_school_info),
-                    getString(R.string.message_activity_school_info));
+            mAdapter.addItem(R.drawable.notice,
+                    getString(R.string.title_activity_notice),
+                    getString(R.string.message_activity_notice));
+//            mAdapter.addItem(R.drawable.calendar,
+//                    getString(R.string.title_activity_schedule),
+//                    getString(R.string.message_activity_schedule));
+//            mAdapter.addItem(R.drawable.clock,
+//                    getString(R.string.title_activity_today_list),
+//                    getString(R.string.message_activity_today_list));
+//            mAdapter.addItem(R.drawable.ic_launcher_big,
+//                    getString(R.string.title_activity_school_info),
+//                    getString(R.string.message_activity_school_info));
         }
 
         return recyclerView;

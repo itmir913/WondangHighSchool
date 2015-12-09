@@ -34,7 +34,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="30dp">
 
@@ -87,6 +87,41 @@
         </LinearLayout>
 
         <!-- TODO 그래프 또는 칼로리 -->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/starLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/giveStar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            android:focusable="false"
+            android:text="별점 주기"
+            android:textAllCaps="true"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/showStar"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            android:focusable="false"
+            android:text="별점 확인"
+            android:textAllCaps="true"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

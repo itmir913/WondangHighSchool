@@ -32,6 +32,10 @@
             android:label="@string/title_activity_bap"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".activity.bap.star.BapStarActivity"
+            android:label="@string/title_activity_bap_star"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".activity.timetable.TimeTableActivity"
             android:label="@string/title_activity_time_table"
             android:theme="@style/AppTheme" />
@@ -43,8 +47,8 @@
             android:label="@string/title_activity_notice"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.bap.star.BapStarActivity"
-            android:label="@string/title_activity_bap_star"
+            android:name=".activity.notice.NoticeSendActivity"
+            android:label="@string/title_activity_notice_send"
             android:theme="@style/AppTheme" />
 
         <!-- AutoUpdate -->
@@ -94,6 +98,7 @@
                 <action android:name="android.intent.action.TIME_CHANGED" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

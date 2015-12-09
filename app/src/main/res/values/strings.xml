@@ -184,11 +184,12 @@
 \n- 대회 정보 기능 추가
 \n- 이스터에그 추가 (어플내 숨겨져있는 버튼을 찾아 이스터 에그를 발견해 보세요!)
 \n- 기타 급식 오류, 악보 오류 수정</string>
-    <string name="user_info_student">학생</string>
-    <string name="user_info_licensed">관리자</string>
+    <string name="user_info_licensed">관리자 등급</string>
+    <string name="user_info_require_message">게시글 작성을 위해서 관리자 권한이 필요합니다.</string>
     <string name="user_info_class_up_title">관리자 인증 암호를 입력하세요</string>
     <string name="user_info_class_up_success">관리자 인증 성공</string>
-    <string name="title_activity_notice">공지사항</string>
+    <string name="title_activity_notice">학생회 공지사항</string>
+    <string name="message_activity_notice">학생회의 공지사항을 확인합니다.</string>
     <string name="title_activity_bap_star">급식 별점</string>
     <string name="bap_star_once_title">별점 전송 제한</string>
     <string name="bap_star_once_message">급식당 하루에 한번만 별점을 등록할 수 있습니다.</string>
@@ -196,5 +197,12 @@
     <string name="post_bap_star_posting">급식 별점 전송중</string>
     <string name="post_bap_star_success">급식 별점 전송을 성공했습니다!</string>
     <string name="post_bap_star_failed">급식 별점 전송에 실패했습니다!</string>
+    <string name="title_activity_notice_send">공지사항 게시</string>
+    <string name="post_notice_title">공지사항 전송</string>
+    <string name="post_notice_alert">한번 게시된 공지사항은 앱 개발자만 삭제할 수 있습니다. 다시 한번 확인하시고 전송하십시오.
+\n반영까지 약 5분정도 소요될 수 있습니다.</string>
+    <string name="post_notice_posting">공지사항을 전송중입니다.</string>
+    <string name="post_notice_success">공지사항 전송을 성공했습니다!</string>
+    <string name="post_notice_failed">공지사항 전송에 실패했습니다!</string>
 
 </resources>

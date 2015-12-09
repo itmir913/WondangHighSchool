@@ -221,9 +221,15 @@ public class BapActivity extends AppCompatActivity {
                 Preference mPref = new Preference(getApplicationContext(), BapTool.BAP_PREFERENCE_NAME);
                 mPref.remove(mPrefLunchName);
                 mPref.remove(mPrefDinnerName);
-            }
 
-            getBapList(true);
+                getBapList(true);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatErrorAlertDialogStyle);
+                builder.setTitle(R.string.no_network_title);
+                builder.setMessage(R.string.no_network_msg);
+                builder.setPositiveButton(android.R.string.ok, null);
+                builder.show();
+            }
 
             return true;
         } else if (id == R.id.action_today) {
