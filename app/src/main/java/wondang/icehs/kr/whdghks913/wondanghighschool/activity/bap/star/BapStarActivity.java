@@ -120,9 +120,9 @@ public class BapStarActivity extends AppCompatActivity {
 
     public void postStar(View v) {
         // 0 : Lunch, 1 : Dinner
-        mPref = new Preference(this);
-        String lunchKey = "Lunch_" + year + month + day;
-        String dinnerKey = "Dinner_" + year + month + day;
+        mPref = new Preference(this, "RateStarInfo");
+        String lunchKey = "LunchStar_" + year + month + day;
+        String dinnerKey = "DinnerStar_" + year + month + day;
         boolean lunch = mPref.getBoolean(lunchKey, true);
         boolean dinner = mPref.getBoolean(dinnerKey, true);
 
@@ -222,7 +222,7 @@ public class BapStarActivity extends AppCompatActivity {
                 builder.show();
 
                 if (mPref == null)
-                    mPref = new Preference(getApplicationContext());
+                    mPref = new Preference(getApplicationContext(), "RateStarInfo");
                 String lunchKey = "LunchStar_" + year + month + day;
                 String dinnerKey = "DinnerStar_" + year + month + day;
                 if (value == 0) {
