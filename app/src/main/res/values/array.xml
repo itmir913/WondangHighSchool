@@ -20,6 +20,11 @@
         <item>10반</item>
     </string-array>
 
+    <string-array name="myType">
+        <item>과중</item>
+        <item>인문</item>
+    </string-array>
+
     <string-array name="myWeek">
         <item>월요일</item>
         <item>화요일</item>

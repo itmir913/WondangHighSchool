@@ -41,7 +41,6 @@ public class TimeTableTool {
     }
 
     public static timeTableData getTimeTableData(int mGrade, int mClass, int DayOfWeek) {
-
         if (mGrade == -1 || mClass == -1) {
             return null;
         }

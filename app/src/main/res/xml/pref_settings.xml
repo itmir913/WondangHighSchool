@@ -86,8 +86,8 @@
     <PreferenceCategory android:title="접근 권한">
         <Preference
             android:key="proUpgrade"
-            android:summary="학생 등급"
-            android:title="사용자 등급" />
+            android:summary="학생 등급입니다."
+            android:title="사용자 등급 안내" />
     </PreferenceCategory>
 
 </PreferenceScreen>

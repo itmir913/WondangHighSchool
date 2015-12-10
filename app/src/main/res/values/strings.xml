@@ -1,15 +1,29 @@
 <resources>
     <!-- 메인 -->
     <string name="app_name">원당고</string>
+    <string name="activity_main_fragment_simple">간단 보기</string>
+    <string name="activity_main_fragment_detailed">교내 정보</string>
+    <!-- 기본 -->
+    <string name="loading_title">로딩중</string>
+    <string name="I_do_not_know_the_error_title">알수없는 오류 발생</string>
+    <string name="I_do_not_know_the_error_message">오류가 발생하였습니다..</string>
+    <!-- 메뉴 -->
     <string name="action_settings">설정</string>
     <string name="action_refresh">새로 고침</string>
-    <string name="activity_main_fragment_simple">간단 보기</string>
-    <string name="activity_main_fragment_detailed">자세히 보기</string>
+    <string name="action_calender">날짜 설정</string>
+    <string name="action_today">오늘 날짜</string>
+    <string name="action_show_star">별점 확인</string>
+    <string name="action_reset_mygrade">학급 정보 재설정</string>
+    <string name="action_share_timetable">시간표 공유</string>
+    <string name="action_share_timetable_msg">%1$s 시간표
+\n%2$s</string>
+    <string name="action_setting_mygrade">학년 설정</string>
+    <string name="action_setting_myclass">반 설정</string>
+    <string name="action_share_day">공유할 요일 선택</string>
+    <string name="action_download_db">DB 업데이트</string>
     <!-- 급식 -->
     <string name="title_activity_bap">급식</string>
     <string name="message_activity_bap">급식을 확인합니다.</string>
-    <string name="action_calender">날짜 설정</string>
-    <string name="action_today">오늘 날짜</string>
     <string name="today_lunch">오늘의 점심</string>
     <string name="today_dinner">오늘의 저녁</string>
     <string name="no_data_lunch">점심이 없습니다</string>
@@ -24,8 +38,6 @@
     <string name="shareBap_message_msg">%1$s의 급식 목록
 \n\n점심 : %2$s
 \n\n저녁 : %3$s</string>
-    <string name="loading_title">로딩중</string>
-    <string name="action_show_star">별점 확인</string>
     <!-- 시간표 -->
     <string name="title_activity_time_table">시간표</string>
     <string name="message_activity_time_table">시간표를 확인합니다.</string>
@@ -37,16 +49,6 @@
     <string name="timetable_title">%1$d학년 %2$d반 시간표</string>
     <string name="no_time_table_db_title">시간표 DB 없음</string>
     <string name="no_time_table_db_message">시간표 DB가 없습니다, 다운로드 하시겠습니까?</string>
-    <string name="action_reset_mygrade">학급 정보 재설정</string>
-    <string name="action_share_timetable">시간표 공유</string>
-    <string name="action_share_timetable_msg">%1$s 시간표
-\n%2$s</string>
-    <string name="action_setting_mygrade">학년 설정</string>
-    <string name="action_setting_myclass">반 설정</string>
-    <string name="action_share_day">공유할 요일 선택</string>
-    <string name="I_do_not_know_the_error_title">알수없는 오류 발생</string>
-    <string name="I_do_not_know_the_error_message">오류가 발생하였습니다..</string>
-    <string name="action_download_db">DB 업데이트</string>
     <!-- 설정 -->
     <string name="title_activity_settings">설정</string>
     <!-- 일정 -->
@@ -68,8 +70,8 @@
 \n몇일동안 저와 친구들의 도움으로 테스트를 해보았으나 아직은 부족한 기능입니다
 \n어플을 사용하시다 강제종료가 발생하면 꼭 "보고(신고)" 버튼을 눌러 신고해 주세요!</string>
     <!-- 급식 자동 업데이트 알림 -->
-    <string name="bapUpdateNotification_ticker">원당고등학교 급식 업데이트중</string>
     <string name="bapUpdateNotification_title">급식 업데이트중</string>
+    <string name="bapUpdateNotification_ticker">원당고등학교 급식 업데이트중</string>
     <string name="bapUpdateNotification_notification">급식 업데이트 알림</string>
     <string name="bapUpdateNotification_msg">급식을 업데이트 하고 있습니다 잠시만 기다려 주세요</string>
     <string name="bapUpdate_Error_Net_title">네트워크 연결 안됨</string>
@@ -109,7 +111,7 @@
 \n- 학교 급식 평점 주기 기능 추가
 \n- 시간표 데이터를 인터넷에서 바로 업데이트 할 수 있도록 수정
 \n- 학생회 공지사항을 표시할 수 있는 기능 추가</string>
-    <string name="user_info_licensed">관리자 등급</string>
+    <string name="user_info_licensed">관리자 등급이 활성화되었습니다.</string>
     <string name="user_info_require_message">게시글 작성을 위해서 관리자 권한이 필요합니다.</string>
     <string name="user_info_class_up_title">관리자 인증 암호를 입력하세요</string>
     <string name="title_activity_notice">학생회 공지사항</string>
@@ -128,5 +130,10 @@
     <string name="post_notice_posting">공지사항을 전송중입니다.</string>
     <string name="post_notice_success">공지사항 전송을 성공했습니다!</string>
     <string name="post_notice_failed">공지사항 전송에 실패했습니다!</string>
+    <string name="title_activity_exam_range">시험 시간표</string>
+    <string name="message_activity_exam_range">시험 시간표를 확인합니다.</string>
+    <string name="exam_range_title">%1$d학년 %2$s %3$s %4$s 시간표</string><!-- 1학년 과중 2학기 기말 시간표 -->
+    <string name="no_exam_db_title">시험 시간표 DB 없음</string>
+    <string name="no_exam_db_message">시험 시간표 DB가 없습니다, 다운로드 하시겠습니까?</string>
 
 </resources>

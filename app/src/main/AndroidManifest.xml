@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="wondang.icehs.kr.whdghks913.wondanghighschool">
+    package="wondang.icehs.kr.whdghks913.wondanghighschool" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,14 +14,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
         <!-- Activity -->
         <activity
             android:name=".activity.main.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +60,7 @@
         <receiver
             android:name=".autoupdate.BroadCast"
             android:label="@string/title_broadcast_autoupdate"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -73,7 +73,7 @@
         <!-- AppWidget -->
         <receiver
             android:name=".widget.BapWidget"
-            android:label="@string/widget_bap_name">
+            android:label="@string/widget_bap_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -84,7 +84,7 @@
         </receiver>
         <receiver
             android:name=".widget.TimeTableWidget"
-            android:label="@string/widget_timetable_name">
+            android:label="@string/widget_timetable_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -96,7 +96,7 @@
         <receiver
             android:name=".widget.WidgetBroadCast"
             android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.DATE_CHANGED" />
@@ -104,6 +104,11 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".activity.exam.ExamRangeActivity"
+            android:label="@string/title_activity_exam_range"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

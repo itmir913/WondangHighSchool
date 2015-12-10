@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.exam.ExamRangeActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.notice.NoticeActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.schedule.ScheduleActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable.TimeTableActivity;
@@ -65,6 +66,7 @@ public class MainFragment extends Fragment {
                             startActivity(new Intent(getActivity(), ScheduleActivity.class));
                             break;
                         case 2:
+                            startActivity(new Intent(getActivity(), ExamRangeActivity.class));
                             break;
                         case 3:
                             break;
@@ -112,9 +114,9 @@ public class MainFragment extends Fragment {
             mAdapter.addItem(R.drawable.calendar,
                     getString(R.string.title_activity_schedule),
                     getString(R.string.message_activity_schedule));
-//            mAdapter.addItem(R.drawable.ic_launcher_big,
-//                    getString(R.string.title_activity_school_info),
-//                    getString(R.string.message_activity_school_info));
+            mAdapter.addItem(R.drawable.ic_launcher_big,
+                    getString(R.string.title_activity_exam_range),
+                    getString(R.string.message_activity_exam_range));
         }
 
         return recyclerView;
