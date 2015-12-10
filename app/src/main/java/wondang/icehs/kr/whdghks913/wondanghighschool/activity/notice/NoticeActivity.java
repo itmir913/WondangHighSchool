@@ -107,7 +107,7 @@ public class NoticeActivity extends AppCompatActivity {
         if (new File(TimeTableTool.mFilePath + NoticeDBName).exists()) {
             showListViewDate();
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext(), R.style.AppCompatErrorAlertDialogStyle);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatErrorAlertDialogStyle);
             builder.setTitle(R.string.no_network_title);
             builder.setMessage(R.string.no_network_msg);
             builder.setPositiveButton(android.R.string.ok, null);

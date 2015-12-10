@@ -2,10 +2,10 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.tool;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Environment;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Locale;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 
@@ -16,12 +16,10 @@ public class TimeTableTool {
     public static final String TimeTableDBName = "WondangHighSchoolTimeTable.db";
     public static final String tableName = "WondangTimeTable";
 
-//    public final static String mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WondangHS/";
+    //    public final static String mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WondangHS/";
     public final static String mFilePath = "/data/data/wondang.icehs.kr.whdghks913.wondanghighschool/databases/";
     public final static String mGoogleSpreadSheetUrl = "https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=0&single=true";
 //    public final static int dbVersion = 6;
-
-    public final static String[] mDisplayName = {"월요일", "화요일", "수요일", "목요일", "금요일"};
 
 //    public static boolean getDBUpdate(Context mContext) {
 //        Preference mPref = new Preference(mContext);
@@ -114,6 +112,7 @@ public class TimeTableTool {
         todayTimeTableData mData = new todayTimeTableData();
 
         Calendar mCalendar = Calendar.getInstance();
+
         int DayOfWeek = mCalendar.get(Calendar.DAY_OF_WEEK);
 
         int mGrade = mPref.getInt("myGrade", -1);
@@ -127,7 +126,7 @@ public class TimeTableTool {
             return mData;
         }
 
-        mData.title = String.format(mContext.getString(R.string.today_timetable), TimeTableTool.mDisplayName[DayOfWeek - 2]);
+        mData.title = String.format(mContext.getString(R.string.today_timetable), mCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.KOREAN));
 
         if (mGrade == -1 || mClass == -1) {
             mData.info = mContext.getString(R.string.no_setting_my_grade);
