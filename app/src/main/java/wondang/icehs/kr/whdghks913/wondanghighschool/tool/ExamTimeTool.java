@@ -3,6 +3,7 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.tool;
 import android.database.Cursor;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by whdghks913 on 2015-12-10.
@@ -35,12 +36,42 @@ public class ExamTimeTool {
         return mData;
     }
 
+    /**
+     * type 0 : 과중
+     * type 1 : 인문
+     * position : 시험날짜
+     */
+    public static ArrayList<examTimeTableData> getExamTimeTable(int grade, int type, int position) {
+        Database mDatabase = new Database();
+        mDatabase.openDatabase(TimeTableTool.mFilePath, ExamDBName);
+
+        Cursor mCursor = mDatabase.getData(ExamTableName, "position, date, " + (type == 0 ? "science_" : "culture_") + grade);
+        ArrayList<examTimeTableData> mValues = new ArrayList<>();
+
+        for (int i = 0; i < mCursor.getCount(); i++) {
+            mCursor.moveToNext();
+
+            int examPosition = Integer.parseInt(mCursor.getString(0));
+            if (examPosition != position)
+                continue;
+
+            examTimeTableData mData = new examTimeTableData();
+
+            mData.date = mCursor.getString(1);
+            mData.subject = mCursor.getString(2);
+
+            mValues.add(mData);
+        }
+
+        return mValues;
+    }
+
     public static class examData {
         public String date, type, days;
     }
 
     public static class examTimeTableData {
-        public String date, type, days;
+        public String date, subject;
     }
 
 }

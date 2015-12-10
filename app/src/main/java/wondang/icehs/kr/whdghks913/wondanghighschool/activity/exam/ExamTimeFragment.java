@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.ExamTimeTool;
 
 /**
  * Created by whdghks913 on 2015-12-10.
@@ -40,9 +43,11 @@ public class ExamTimeFragment extends Fragment {
         int type = args.getInt("type");
         int position = args.getInt("position");
 
-        mAdapter.addItem(1, "문학");
-        mAdapter.addItem(2, "미적분2");
-        mAdapter.addItem(3, "확률과 통계");
+        ArrayList<ExamTimeTool.examTimeTableData> mValues = ExamTimeTool.getExamTimeTable(grade, type, position);
+        for (int i = 0; i < mValues.size(); i++) {
+            ExamTimeTool.examTimeTableData mData = mValues.get(i);
+            mAdapter.addItem(i + 1, mData.subject);
+        }
 
         return recyclerView;
     }

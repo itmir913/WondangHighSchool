@@ -21,6 +21,8 @@ public class TimeTableTool {
     public final static String mGoogleSpreadSheetUrl = "https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=0&single=true";
 //    public final static int dbVersion = 6;
 
+    public final static String[] mDisplayName = {"월요일", "화요일", "수요일", "목요일", "금요일"};
+
 //    public static boolean getDBUpdate(Context mContext) {
 //        Preference mPref = new Preference(mContext);
 //
@@ -72,8 +74,7 @@ public class TimeTableTool {
         mCursor.moveToPosition((DayOfWeek * 7) + 1);
 
         for (int period = 0; period < 7; period++) {
-            String mSubject;
-            String mRoom;
+            String mSubject, mRoom;
 
             /**
              * | | | |
@@ -81,10 +82,10 @@ public class TimeTableTool {
              */
 
             mSubject = mCursor.getString(0);
-            if (mGrade != 3) {
-                mRoom = mCursor.getString(1);
-            } else {
+            if (mGrade == 3) {
                 mRoom = "교실";
+            } else {
+                mRoom = mCursor.getString(1);
             }
 
             if (mSubject != null && !mSubject.isEmpty()

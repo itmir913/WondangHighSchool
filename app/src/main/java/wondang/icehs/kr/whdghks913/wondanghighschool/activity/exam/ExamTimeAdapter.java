@@ -36,7 +36,7 @@ public class ExamTimeAdapter extends RecyclerView.Adapter<ExamTimeAdapter.ExamTi
     public void onBindViewHolder(final ExamTimeViewHolder holder, int position) {
         ExamTimeInfo mInfo = getItemData(position);
 
-        holder.mTime.setText(String.valueOf(mInfo.time));
+        holder.mTime.setText(mInfo.time + "교시");
         holder.mSubject.setText(mInfo.subject);
     }
 
