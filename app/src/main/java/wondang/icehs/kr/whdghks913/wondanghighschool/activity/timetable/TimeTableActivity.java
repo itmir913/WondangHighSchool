@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -75,7 +76,7 @@ public class TimeTableActivity extends AppCompatActivity {
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    downloadingDB(true);
+                    downloadingDB();
                 }
             });
             builder.setNegativeButton(android.R.string.cancel, null);
@@ -91,6 +92,14 @@ public class TimeTableActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.mTabLayout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+
+        FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.mFab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                downloadingDB();
+            }
+        });
 
         setCurrentItem();
     }
@@ -138,10 +147,10 @@ public class TimeTableActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void downloadingDB(final boolean isDeleteFile) {
+    public void downloadingDB() {
         if (Tools.isOnline(getApplicationContext())) {
             if (Tools.isWifi(getApplicationContext())) {
-                downloadStart(isDeleteFile);
+                downloadStart();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
                 builder.setTitle(R.string.no_wifi_title);
@@ -150,7 +159,7 @@ public class TimeTableActivity extends AppCompatActivity {
                 builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        downloadStart(isDeleteFile);
+                        downloadStart();
                     }
                 });
                 builder.show();
@@ -164,9 +173,8 @@ public class TimeTableActivity extends AppCompatActivity {
         }
     }
 
-    private void downloadStart(boolean isDeleteFile) {
-        if (isDeleteFile)
-            new File(TimeTableTool.mFilePath + TimeTableTool.TimeTableDBName).delete();
+    private void downloadStart() {
+        new File(TimeTableTool.mFilePath + TimeTableTool.TimeTableDBName).delete();
         DBDownloadTask mTask = new DBDownloadTask();
         mTask.execute(TimeTableTool.mGoogleSpreadSheetUrl);
     }
@@ -288,7 +296,7 @@ public class TimeTableActivity extends AppCompatActivity {
             shareTimeTable();
             return true;
         } else if (id == R.id.action_download_db) {
-            downloadingDB(true);
+            downloadingDB();
         }
 
         return super.onOptionsItemSelected(item);

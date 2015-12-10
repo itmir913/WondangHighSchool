@@ -4,6 +4,7 @@
     tools:context=".activity.main.MainActivity">
     <item
         android:id="@+id/action_download_db"
+        android:icon="@drawable/ic_update"
         android:orderInCategory="1"
         android:title="@string/action_download_db"
         app:showAsAction="never" />

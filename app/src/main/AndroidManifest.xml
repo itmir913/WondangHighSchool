@@ -55,6 +55,10 @@
             android:name=".activity.schedule.ScheduleActivity"
             android:label="@string/title_activity_schedule"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.exam.ExamTimeActivity"
+            android:label="@string/title_activity_exam_range"
+            android:theme="@style/AppTheme" />
 
         <!-- AutoUpdate -->
         <receiver
@@ -104,11 +108,6 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".activity.exam.ExamTimeActivity"
-            android:label="@string/title_activity_exam_range"
-            android:theme="@style/AppTheme" >
-        </activity>
     </application>
 
 </manifest>
