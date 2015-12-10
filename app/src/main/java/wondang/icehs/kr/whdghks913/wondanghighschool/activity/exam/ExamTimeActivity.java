@@ -26,12 +26,12 @@ import java.util.List;
 import itmir.tistory.com.spreadsheets.GoogleSheetTask;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Database;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.ExamRangeTool;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.ExamTimeTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
 
-public class ExamRangeActivity extends AppCompatActivity {
+public class ExamTimeActivity extends AppCompatActivity {
     ViewPager viewPager;
     Preference mPref;
     int mGrade, mType;
@@ -39,18 +39,18 @@ public class ExamRangeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam_range);
+        setContentView(R.layout.activity_exam_time);
 
         mPref = new Preference(getApplicationContext());
         mGrade = mPref.getInt("myGrade", -1);
         mType = mPref.getInt("myType", -1);
-        boolean fileExists = ExamRangeTool.fileExists();
+        boolean fileExists = ExamTimeTool.fileExists();
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.mToolbar);
         if ((mGrade != -1) && (mType != -1)) {
             if (fileExists) {
-                ExamRangeTool.examData mData = ExamRangeTool.getExamInfoData();
-                mToolbar.setTitle(String.format(getString(R.string.exam_range_title), mGrade, (mType == 0 ? "과중" : "인문"), mData.date, mData.type));
+                ExamTimeTool.examData mData = ExamTimeTool.getExamInfoData();
+                mToolbar.setTitle(String.format(getString(R.string.exam_time_title), mGrade, (mType == 0 ? "과중" : "인문"), mData.date, mData.type));
             }
         }
         setSupportActionBar(mToolbar);
@@ -131,19 +131,19 @@ public class ExamRangeActivity extends AppCompatActivity {
     }
 
     private void downloadStart() {
-        new File(TimeTableTool.mFilePath + ExamRangeTool.ExamDBName).delete();
+        new File(TimeTableTool.mFilePath + ExamTimeTool.ExamDBName).delete();
         ExamDBDownloadTask mTask = new ExamDBDownloadTask();
-        mTask.execute(ExamRangeTool.mGoogleSpreadSheetUrl);
+        mTask.execute(ExamTimeTool.mGoogleSpreadSheetUrl);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter mAdapter = new Adapter(getSupportFragmentManager());
 
-        ExamRangeTool.examData mData = ExamRangeTool.getExamInfoData();
+        ExamTimeTool.examData mData = ExamTimeTool.getExamInfoData();
         int days = Integer.parseInt(mData.days);
 
         for (int day = 1; day <= days; day++) {
-            mAdapter.addFragment(day + "일째", ExamRangeFragment.getInstance(mGrade, mType, day));
+            mAdapter.addFragment(day + "일째", ExamTimeFragment.getInstance(mGrade, mType, day));
         }
 
         viewPager.setAdapter(mAdapter);
@@ -191,7 +191,7 @@ public class ExamRangeActivity extends AppCompatActivity {
                     resetType();
                 } else {
                     Toast.makeText(getApplicationContext(), "다시 로딩됩니다", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), ExamRangeActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ExamTimeActivity.class));
                     finish();
                 }
             }
@@ -209,7 +209,7 @@ public class ExamRangeActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 mPref.putInt("myType", which);
                 Toast.makeText(getApplicationContext(), "다시 로딩됩니다", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), ExamRangeActivity.class));
+                startActivity(new Intent(getApplicationContext(), ExamTimeActivity.class));
                 finish();
             }
         });
@@ -223,7 +223,7 @@ public class ExamRangeActivity extends AppCompatActivity {
 
         @Override
         public void onPreDownload() {
-            mDialog = new ProgressDialog(ExamRangeActivity.this);
+            mDialog = new ProgressDialog(ExamTimeActivity.this);
             mDialog.setIndeterminate(true);
             mDialog.setMessage(getString(R.string.loading_title));
             mDialog.setCanceledOnTouchOutside(false);
@@ -236,7 +236,7 @@ public class ExamRangeActivity extends AppCompatActivity {
 
         @Override
         public void onFinish(long result) {
-            startActivity(new Intent(ExamRangeActivity.this, ExamRangeActivity.class));
+            startActivity(new Intent(ExamTimeActivity.this, ExamTimeActivity.class));
             finish();
 
             if (mDialog != null) {
@@ -260,13 +260,13 @@ public class ExamRangeActivity extends AppCompatActivity {
                     Column.append(" text, ");
                 }
 
-                mDatabase.openOrCreateDatabase(TimeTableTool.mFilePath, ExamRangeTool.ExamDBName, ExamRangeTool.ExamTableName, Column.substring(0, Column.length() - 2));
+                mDatabase.openOrCreateDatabase(TimeTableTool.mFilePath, ExamTimeTool.ExamDBName, ExamTimeTool.ExamTableName, Column.substring(0, Column.length() - 2));
             } else {
                 int length = row.length;
                 for (int i = 0; i < length; i++) {
                     mDatabase.addData(columnFirstRow[i], row[i]);
                 }
-                mDatabase.commit(ExamRangeTool.ExamTableName);
+                mDatabase.commit(ExamTimeTool.ExamTableName);
             }
         }
     }

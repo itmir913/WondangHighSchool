@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
-import wondang.icehs.kr.whdghks913.wondanghighschool.activity.exam.ExamRangeActivity;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.exam.ExamTimeActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.notice.NoticeActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.schedule.ScheduleActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable.TimeTableActivity;
@@ -66,7 +66,7 @@ public class MainFragment extends Fragment {
                             startActivity(new Intent(getActivity(), ScheduleActivity.class));
                             break;
                         case 2:
-                            startActivity(new Intent(getActivity(), ExamRangeActivity.class));
+                            startActivity(new Intent(getActivity(), ExamTimeActivity.class));
                             break;
                         case 3:
                             break;

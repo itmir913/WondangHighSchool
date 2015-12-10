@@ -7,7 +7,7 @@ import java.io.File;
 /**
  * Created by whdghks913 on 2015-12-10.
  */
-public class ExamRangeTool {
+public class ExamTimeTool {
     public static final String ExamDBName = "ExamInfo.db";
     public static final String ExamTableName = "ExamInfo";
     public final static String mGoogleSpreadSheetUrl = "https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=1155107873&single=true";
@@ -36,6 +36,10 @@ public class ExamRangeTool {
     }
 
     public static class examData {
+        public String date, type, days;
+    }
+
+    public static class examTimeTableData {
         public String date, type, days;
     }
 

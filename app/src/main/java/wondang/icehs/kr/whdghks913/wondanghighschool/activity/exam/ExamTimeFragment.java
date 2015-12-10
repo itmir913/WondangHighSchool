@@ -13,10 +13,10 @@ import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 /**
  * Created by whdghks913 on 2015-12-10.
  */
-public class ExamRangeFragment extends Fragment {
+public class ExamTimeFragment extends Fragment {
 
     public static Fragment getInstance(int grade, int type, int position) {
-        ExamRangeFragment mFragment = new ExamRangeFragment();
+        ExamTimeFragment mFragment = new ExamTimeFragment();
 
         Bundle args = new Bundle();
         args.putInt("grade", grade);
@@ -32,7 +32,7 @@ public class ExamRangeFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recyclerview, container, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 
-        final ExamRangeAdapter mAdapter = new ExamRangeAdapter();
+        final ExamTimeAdapter mAdapter = new ExamTimeAdapter();
         recyclerView.setAdapter(mAdapter);
 
         Bundle args = getArguments();
