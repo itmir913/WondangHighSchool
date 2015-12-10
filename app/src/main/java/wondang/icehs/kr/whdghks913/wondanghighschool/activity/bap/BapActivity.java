@@ -20,6 +20,7 @@ import com.fourmob.datetimepicker.date.DatePickerDialog;
 import java.util.Calendar;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.star.BapStarActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.ProcessTask;
@@ -238,6 +239,8 @@ public class BapActivity extends AppCompatActivity {
 
             return true;
 
+        } else if (id == R.id.action_show_star) {
+            startActivity(new Intent(this, BapStarActivity.class).putExtra("starType", 2));
         }
 
         return super.onOptionsItemSelected(item);

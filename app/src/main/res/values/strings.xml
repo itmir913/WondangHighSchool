@@ -25,6 +25,7 @@
 \n\n점심 : %2$s
 \n\n저녁 : %3$s</string>
     <string name="loading_title">로딩중</string>
+    <string name="action_show_star">별점 확인</string>
     <!-- 시간표 -->
     <string name="title_activity_time_table">시간표</string>
     <string name="message_activity_time_table">시간표를 확인합니다.</string>

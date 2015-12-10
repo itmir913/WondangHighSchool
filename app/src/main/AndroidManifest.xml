@@ -50,6 +50,10 @@
             android:name=".activity.notice.NoticeSendActivity"
             android:label="@string/title_activity_notice_send"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.schedule.ScheduleActivity"
+            android:label="@string/title_activity_schedule"
+            android:theme="@style/AppTheme" />
 
         <!-- AutoUpdate -->
         <receiver

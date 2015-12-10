@@ -129,7 +129,6 @@ public class BapStarActivity extends AppCompatActivity {
 
         int position = mGiveStarType.getSelectedItemPosition();
         if ((position == 0 && lunch) || ((position == 1 && dinner))) {
-            mPref.clear();
             float rate = mPostRatingBar.getRating();
             (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString());
         } else {
