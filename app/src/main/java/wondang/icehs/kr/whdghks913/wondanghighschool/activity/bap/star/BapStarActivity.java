@@ -21,6 +21,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -57,6 +58,7 @@ public class BapStarActivity extends AppCompatActivity {
     BapStarShowAdapter mLunchAdapter, mDinnerAdapter;
     Preference mPref;
     int year, month, day;
+    TextView lunchPeopleCount, dinnerPeopleCount;
 
     ArrayList<String> mTimeData = new ArrayList<>();
 
@@ -105,6 +107,8 @@ public class BapStarActivity extends AppCompatActivity {
             mDinnerRatingStar = (RatingBar) findViewById(R.id.mDinnerRatingStar);
             mLunchListView = (ListView) findViewById(R.id.mLunchListView);
             mDinnerListView = (ListView) findViewById(R.id.mDinnerListView);
+            lunchPeopleCount = (TextView) findViewById(R.id.lunchPeopleCount);
+            dinnerPeopleCount = (TextView) findViewById(R.id.dinnerPeopleCount);
             mLunchAdapter = new BapStarShowAdapter(this);
             mDinnerAdapter = new BapStarShowAdapter(this);
             Calendar mCalendar = Calendar.getInstance();
@@ -377,6 +381,7 @@ public class BapStarActivity extends AppCompatActivity {
         Cursor mCursor = mDatabase.getData(StarRateTableName, "*");
 
         int sumLunch = 0, sumDinner = 0;
+        int lunchCount = 0, dinnerCount = 0;
 
         for (int i = 0; i < mCursor.getCount(); i++) {
             mCursor.moveToNext();
@@ -386,35 +391,40 @@ public class BapStarActivity extends AppCompatActivity {
                 continue;
 
             String memo = mCursor.getString(4);
-            if (memo.isEmpty() || memo.length() == 0)
-                continue;
-
             int type = Integer.parseInt(mCursor.getString(2));
             int rate = Integer.parseInt(mCursor.getString(3));
 
             if (type == 0) {
-                mLunchAdapter.addItem(memo);
+                if (!memo.isEmpty() || memo.length() != 0)
+                    mLunchAdapter.addItem(memo);
                 sumLunch += rate;
+                lunchCount += 1;
             } else {
-                mDinnerAdapter.addItem(memo);
+                if (!memo.isEmpty() || memo.length() != 0)
+                    mDinnerAdapter.addItem(memo);
                 sumDinner += rate;
+                dinnerCount += 1;
             }
         }
 
         try {
-            if ((sumLunch != 0) && (mLunchAdapter.getCount() != 0)) {
-                float lunch = (new BigDecimal(sumLunch)).divide(new BigDecimal(mLunchAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+            if ((sumLunch != 0) && (lunchCount != 0)) {
+                float lunch = (new BigDecimal(sumLunch)).divide(new BigDecimal(lunchCount), 2, BigDecimal.ROUND_UP).floatValue();
                 mLunchRatingStar.setRating(lunch);
             } else {
-                mLunchRatingStar.setRating(5f);
+                mLunchRatingStar.setRating(0f);
             }
 
-            if ((sumDinner != 0) && (mDinnerAdapter.getCount() != 0)) {
-                float dinner = (new BigDecimal(sumDinner)).divide(new BigDecimal(mDinnerAdapter.getCount()), 2, BigDecimal.ROUND_UP).floatValue();
+            if ((sumDinner != 0) && (dinnerCount != 0)) {
+                float dinner = (new BigDecimal(sumDinner)).divide(new BigDecimal(dinnerCount), 2, BigDecimal.ROUND_UP).floatValue();
                 mDinnerRatingStar.setRating(dinner);
             } else {
-                mDinnerRatingStar.setRating(5f);
+                mDinnerRatingStar.setRating(0f);
             }
+
+            lunchPeopleCount.setText(String.format(getString(R.string.bap_star_people_count), lunchCount));
+            dinnerPeopleCount.setText(String.format(getString(R.string.bap_star_people_count), dinnerCount));
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }

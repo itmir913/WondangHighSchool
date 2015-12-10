@@ -134,11 +134,13 @@
     <string name="title_activity_notice">학생회 공지사항</string>
     <string name="message_activity_notice">학생회의 공지사항을 확인합니다.</string>
     <string name="title_activity_bap_star">급식 별점</string>
+    <string name="bap_star_people_count">%1$d명 참여</string>
     <string name="bap_star_once_title">별점 전송 제한</string>
     <string name="bap_star_once_message">급식당 하루에 한번만 별점을 등록할 수 있습니다.</string>
     <string name="post_bap_star_title">급식 별점 전송</string>
     <string name="post_bap_star_posting">급식 별점 전송중</string>
-    <string name="post_bap_star_success">급식 별점 전송을 성공했습니다!</string>
+    <string name="post_bap_star_success">급식 별점 전송을 성공했습니다!
+\n반영까지 약 5분정도 소요될 수 있습니다.</string>
     <string name="post_bap_star_failed">급식 별점 전송에 실패했습니다!</string>
     <string name="title_activity_notice_send">공지사항 게시</string>
     <string name="post_notice_title">공지사항 전송</string>
