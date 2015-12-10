@@ -6,7 +6,7 @@ Copyright (C) 2014~2015 JongHwan Lee <whdghks913@naver.com>
 
 ##스크린샷
 ----
-![WondangHighSchool Main Image](https://bytebucket.org/whdghks913/wondanghighschool/raw/20228c5b9ee055f903ecd0154bdda0a66d141f82/Screenshots/WondangHighSchool%20-%201.jpg)
+![WondangHighSchool Main Image](https://bytebucket.org/whdghks913/wondanghighschool/raw/c6bc7e88ec1ccbf2d3741f1ec899ffeec694a64f/Screenshots/WondangHighSchool%20-%201.png)
 
 
 
