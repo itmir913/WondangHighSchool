@@ -164,7 +164,7 @@ public class SettingsActivity extends AppCompatActivity {
                     preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
 
                     updateAlarm updateAlarm = new updateAlarm(getActivity());
-                    updateAlarm.cancle();
+                    updateAlarm.cancel();
 
                     if (index == 0) updateAlarm.autoUpdate();
                     else if (index == 1) updateAlarm.SaturdayUpdate();
@@ -188,7 +188,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                     } else {
                         updateAlarm updateAlarm = new updateAlarm(getActivity());
-                        updateAlarm.cancle();
+                        updateAlarm.cancel();
                     }
                 }
                 return true;

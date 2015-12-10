@@ -15,7 +15,6 @@
             android:id="@+id/mTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
             android:textSize="35sp"
             android:textStyle="bold" />
 

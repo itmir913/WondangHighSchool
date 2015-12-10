@@ -84,7 +84,7 @@ public class updateAlarm {
         mAlarm.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), mPendingIntent);
     }
 
-    public void cancle() {
+    public void cancel() {
         Intent mIntent = new Intent(mContext, BroadCast.class);
         mIntent.setAction(BapTool.ACTION_UPDATE);
         mPendingIntent = PendingIntent.getBroadcast(mContext, 0, mIntent, 0);

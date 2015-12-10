@@ -39,7 +39,15 @@ public class TimeTableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
+
+        mPref = new Preference(getApplicationContext());
+        int mGrade = mPref.getInt("myGrade", -1);
+        int mClass = mPref.getInt("myClass", -1);
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.mToolbar);
+        if ((mGrade != -1) && (mClass != -1)) {
+            mToolbar.setTitle(String.format(getString(R.string.timetable_title), mGrade, mClass));
+        }
         setSupportActionBar(mToolbar);
 
         ActionBar mActionBar = getSupportActionBar();
@@ -55,8 +63,7 @@ public class TimeTableActivity extends AppCompatActivity {
             });
         }
 
-        mPref = new Preference(getApplicationContext());
-        if (mPref.getInt("myGrade", -1) == -1) {
+        if ((mGrade == -1) || (mClass == -1)) {
             resetGrade();
             return;
         }

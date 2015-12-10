@@ -45,7 +45,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     @Override
     public ScheduleAdapter.ScheduleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_schedule_item, parent, false);
         mView.setBackgroundResource(mBackground);
 
         return new ScheduleViewHolder(mView);
@@ -76,8 +76,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             super(mView);
 //            this.mView = mView;
 
-            mSchedule = (TextView) mView.findViewById(android.R.id.text1);
-            mDate = (TextView) mView.findViewById(android.R.id.text2);
+            mSchedule = (TextView) mView.findViewById(R.id.list_item_entry_title);
+            mDate = (TextView) mView.findViewById(R.id.list_item_entry_summary);
         }
     }
 

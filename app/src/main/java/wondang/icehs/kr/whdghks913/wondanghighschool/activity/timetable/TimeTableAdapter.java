@@ -1,10 +1,11 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,15 +13,13 @@ import java.util.ArrayList;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 
 /**
- * Created by whdghks913 on 2015-12-02.
+ * Created by whdghks913 on 2015-12-10.
  */
-public class TimeTableAdapter extends BaseAdapter {
-    //    private int mBackground;
+public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.TimeTableViewHolder> {
+//    private int mBackground;
     private ArrayList<TimeTableInfo> mValues = new ArrayList<>();
-    private Context mContext;
 
     public TimeTableAdapter(Context mContext) {
-        this.mContext = mContext;
 //        TypedValue mTypedValue = new TypedValue();
 //        mContext.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
 //        mBackground = mTypedValue.resourceId;
@@ -37,74 +36,48 @@ public class TimeTableAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
-        TimeTableViewHolder holder;
+    public TimeTableAdapter.TimeTableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_timetable_item, parent, false);
+//        mView.setBackgroundResource(mBackground);
 
-        if (convertView == null) {
-            holder = new TimeTableViewHolder();
+        return new TimeTableViewHolder(mView);
+    }
 
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.row_timetable_item, null);
-
-            holder.mTimeText = (TextView) convertView.findViewById(R.id.mTimeText);
-            holder.mTimeName = (TextView) convertView.findViewById(R.id.mTimeName);
-            holder.mRoom = (TextView) convertView.findViewById(R.id.mRoom);
-
-            convertView.setTag(holder);
-
-        } else {
-            holder = (TimeTableViewHolder) convertView.getTag();
-        }
-
+    @Override
+    public void onBindViewHolder(final TimeTableViewHolder holder, int position) {
         TimeTableInfo mInfo = getItemData(position);
 
-//        boolean isGrade = mInfo.isGrade;
-
-//        if (isGrade) {
-//            if (mInfo.mGrade == -1 || mInfo.mClass == -1) {
-//                holder.mGradeClass.setText(mContext.getString(R.string.no_setting_my_grade));
-//            } else {
-//                holder.mGradeClass.setText(String.format(mContext.getString(R.string.timetable_title), mInfo.mGrade, mInfo.mClass));
-//            }
-//        } else {
-        holder.mTimeText.setText(Integer.toString(mInfo.time));
+        holder.mTimeText.setText(String.valueOf(mInfo.time));
         holder.mTimeName.setText(mInfo.name);
         holder.mRoom.setText(mInfo.room);
-
-
-        return convertView;
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return mValues.size();
-    }
-
-    @Override
-    public TimeTableInfo getItem(int position) {
-        return mValues.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
     public TimeTableInfo getItemData(int position) {
         return mValues.get(position);
     }
 
-    public class TimeTableViewHolder {
-        public TextView mTimeText, mTimeName, mRoom;
+    public class TimeTableViewHolder extends RecyclerView.ViewHolder {
+        //        public final View mView;
+        public final TextView mTimeText, mTimeName, mRoom;
+
+        public TimeTableViewHolder(View mView) {
+            super(mView);
+//            this.mView = mView;
+
+            mTimeText = (TextView) mView.findViewById(R.id.mTimeText);
+            mTimeName = (TextView) mView.findViewById(R.id.mTimeName);
+            mRoom = (TextView) mView.findViewById(R.id.mRoom);
+        }
     }
 
     public class TimeTableInfo {
-//        public boolean isGrade;
         public int time;
         public String name;
         public String room;
-
-//        public int mGrade;
-//        public int mClass;
     }
 }

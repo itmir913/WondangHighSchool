@@ -2,6 +2,8 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.activity.schedule.ScheduleAdapter;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
 
 /**
@@ -30,12 +33,11 @@ public class TimeTableFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.row_timetable_listview, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.mListView);
-        TextView mGradeClass = (TextView) view.findViewById(R.id.mGradeClass);
+        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recyclerview, container, false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 
-        TimeTableAdapter mAdapter = new TimeTableAdapter(getActivity());
-        listView.setAdapter(mAdapter);
+        final TimeTableAdapter mAdapter = new TimeTableAdapter(getActivity());
+        recyclerView.setAdapter(mAdapter);
 
         Bundle args = getArguments();
         int mGrade = args.getInt("mGrade");
@@ -44,16 +46,10 @@ public class TimeTableFragment extends Fragment {
 
         TimeTableTool.timeTableData mData = TimeTableTool.getTimeTableData(mGrade, mClass, dayOfWeek);
 
-        if (mGrade == -1 || mClass == -1) {
-            mGradeClass.setText(R.string.no_setting_my_grade);
-        } else {
-            mGradeClass.setText(String.format(getString(R.string.timetable_title), mGrade, mClass));
-        }
-
         for (int position = 0; position < 7; position++) {
             mAdapter.addItem(position + 1, mData.subject[position], mData.room[position]);
         }
 
-        return view;
+        return recyclerView;
     }
 }

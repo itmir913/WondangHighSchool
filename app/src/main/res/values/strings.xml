@@ -52,11 +52,6 @@
     <!-- 일정 -->
     <string name="title_activity_schedule">일정</string>
     <string name="message_activity_schedule">일정을 확인합니다.</string>
-    <!-- 학교 정보 -->
-    <string name="title_activity_school_info">학교 정보</string>
-    <string name="message_activity_school_info">원당고 정보를 확인합니다.</string>
-    <!-- 자세히보기 -->
-    <string name="title_activity_image_detail">자세히보기</string>
     <!-- 급식 자동 업데이트 -->
     <string name="title_service_autoupdate">자동 업데이트 서비스</string>
     <string name="title_broadcast_autoupdate">자동 업데이트 리시버</string>
@@ -77,8 +72,6 @@
     <string name="bapUpdateNotification_title">급식 업데이트중</string>
     <string name="bapUpdateNotification_notification">급식 업데이트 알림</string>
     <string name="bapUpdateNotification_msg">급식을 업데이트 하고 있습니다 잠시만 기다려 주세요</string>
-    <string name="bapUpdate_Error_Wifi_title">WIFI 연결 안됨</string>
-    <string name="bapUpdate_Error_Wifi_msg">WIFI 연결이 되어 있지 않습니다</string>
     <string name="bapUpdate_Error_Net_title">네트워크 연결 안됨</string>
     <string name="bapUpdate_Error_Net_msg">인터넷에 접속할수 없습니다</string>
     <string name="bapUpdate_Error_get_title">급식 가져오기 실패</string>
@@ -89,10 +82,6 @@
     <string name="widget_bap_name">원당고 급식 위젯</string>
     <string name="widget_timetable_name">원당고 시간표 위젯</string>
     <string name="widget_no_data">데이터가 없습니다 날짜를 눌러 새로고침 하세요</string>
-    <string name="widget_updating">급식 업데이트중입니다</string>
-    <!-- 일과 운영표 -->
-    <string name="title_activity_today_list">일과 운영표</string>
-    <string name="message_activity_today_list">일과 운영표를 확인합니다.</string>
     <!-- 시간표 위젯 -->
     <!-- 오픈소스 라이센스 -->
     <string name="license_title">라이센스 정보</string>
@@ -109,86 +98,20 @@
 \n(https://github.com/flavienlaurent/datetimepicker)
 \n
 \n- Icons
-\nic_notifi_icon.png : https://www.iconfinder.com/icons/176629/download_internet_manager_metroui_icon#size=128
-\ncalendar.png : http://www.tutsmag.com/wp-content/uploads/2013/06/final-result-calendar.png
-\nrice.png : http://keworganics.com.au/product-category/legumes/
-\ntimetable.png : http://iconshow.me/watch-icon
-\nclock.png : http://imgkid.com/alarm-clock-icon.shtml (http://appevent.com/wp-content/uploads/2014/08/app-icon-17597-mzl.atkfmgta.png)</string>
+\n ic_notification_icon.png : https://www.iconfinder.com/icons/176629/download_internet_manager_metroui_icon#size=128
+\n calendar.png : http://www.tutsmag.com/wp-content/uploads/2013/06/final-result-calendar.png
+\n rice.png : http://keworganics.com.au/product-category/legumes/
+\n timetable.png : http://iconshow.me/watch-icon</string>
     <!-- 수정 내역 -->
     <string name="changeLog_title">수정 내역</string>
-    <string name="changeLog_msg">[3.9] : 시간표 업데이트
-\n- 요일별 시간표 스크롤 가능하게 변경
-\n- 시간표 위젯 추가
-\n
-\n[3.7] : 급식 업데이트
-\n- 급식 날짜 선택시 나타나는 UI 변경
-\n- 3x2 위젯 추가
-\n
-\n[3.6] : 2015년 임시 시간표 업데이트
-\n- 학교 홈페이지에 올라온 3월 임시 시간표로 업데이트 했습니다
-\n
-\n[3.5] : 2015년 일정 업데이트
-\n- 학교 홈페이지에 올라온 2015년 일정으로 업데이트 했습니다
-\n
-\n[3.4] : 버그 수정
-\n- 알려진 버그와 알려지지 않은 버그를 수정했습니다
-\n
-\n[3.3] : 일과 운영표 추가
-\n- 학교 홈페이지에 올라온 일과 운영표를 추가했습니다
-\n
-\n[3.2] : 급식 위젯 업데이트
-\n- 급식 위젯 추가
-\n- 위젯의 날짜부분을 누르면 위젯이 업데이트 되서 표시됩니다.
-\n
-\n[3.0] : 아주 큰 메인 업데이트
-\n- Material Design 적용
-\n- 한번 불러온 급식을 재로딩시 데이터 필요 없음
-\n- 메인 화면에서 오늘의 급식과 시간표 확인 가능
-\n- 기타 필요없는 기능 삭제 및 최적화
-\n
-\n[2.8] : 설정 업데이트
-\n- 설정에 어플 버전 보기 추가
-\n
-\n[2.7] : 대회정보 업데이트
-\n- 대회정보 접속시 가끔 강제종료 되던 문제 해결
-\n- 인천 원당 고등학교 블로그 스킨 변경
-\n
-\n[2.6] : 시간표 DB 업데이트
-\n- 교실이 변경된 수업 반영 (불편을 끼쳐드려 죄송합니다..)
-\n
-\n[2.5] : 급식 업데이트
-\n- 급식을 터치하면 급식을 자세히 볼수 있습니다
-\n
-\n[2.4] : 학사일정 업데이트, 마이너패치
-\n- 학사 일정이 표시되는 화면을 갈아엎었습니다 새로운 화면을 사용할수 있습니다!
-\n- 급식등 일부 기능이 개선되었습니다
-\n- 이제 이름을 저장할수 있습니다! 이름을 저장하면 어플을 실행할때 따뜻한 인사를 합니다(?)
-\n
-\n[2.3] : 급식 업데이트
-\n- 저번주, 다음주 급식을 확인할수 있는 기능 추가
-\n- 급식을 확인할 날짜를 선택할수 있는 기능 추가
-\n
-\n[2.2] : 시간표 업데이트
-\n- 자신의 반 시간표로 바로 진입 기능 추가
-\n- 시간표 공유 기능 추가
-\n
-\n[2.1] : 시간표 업데이트
-\n- 메인 화면의 리스트 순서 변경
-\n- 메인 화면 일부 아이콘 변경
-\n- 전 학급 시간표 추가
-\n- 필요없는 코드 제거
-\n
-\n[2.0] : 큰 업데이트
-\n- 설정창 적용 (이제 깔끔한 설정창을 만나볼수 있습니다!)
-\n- 급식 자동 업데이트 기능 추가 (설정 화면에서 활성화 할수 있습니다)
-\n- 메인 화면에서 가로모드 지원
-\n- 대회 정보 기능 추가
-\n- 이스터에그 추가 (어플내 숨겨져있는 버튼을 찾아 이스터 에그를 발견해 보세요!)
-\n- 기타 급식 오류, 악보 오류 수정</string>
+    <string name="changeLog_msg">v5.0
+\n- 안드로이드 Material Design 업데이트
+\n- 학교 급식 평점 주기 기능 추가
+\n- 시간표 데이터를 인터넷에서 바로 업데이트 할 수 있도록 수정
+\n- 학생회 공지사항을 표시할 수 있는 기능 추가</string>
     <string name="user_info_licensed">관리자 등급</string>
     <string name="user_info_require_message">게시글 작성을 위해서 관리자 권한이 필요합니다.</string>
     <string name="user_info_class_up_title">관리자 인증 암호를 입력하세요</string>
-    <string name="user_info_class_up_success">관리자 인증 성공</string>
     <string name="title_activity_notice">학생회 공지사항</string>
     <string name="message_activity_notice">학생회의 공지사항을 확인합니다.</string>
     <string name="title_activity_bap_star">급식 별점</string>
