@@ -1,5 +1,6 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.exam;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class ExamTimeAdapter extends RecyclerView.Adapter<ExamTimeAdapter.ExamTi
     public void onBindViewHolder(final ExamTimeViewHolder holder, int position) {
         ExamTimeInfo mInfo = getItemData(position);
 
-        holder.mTime.setText(mInfo.time + "교시");
+        holder.mTime.setText(String.format(holder.mContext.getString(R.string.exam_order), mInfo.time));
         holder.mSubject.setText(mInfo.subject);
     }
 
@@ -50,11 +51,13 @@ public class ExamTimeAdapter extends RecyclerView.Adapter<ExamTimeAdapter.ExamTi
     }
 
     public class ExamTimeViewHolder extends RecyclerView.ViewHolder {
+        public final Context mContext;
         public final TextView mTime, mSubject;
 
         public ExamTimeViewHolder(View mView) {
             super(mView);
 
+            mContext = mView.getContext();
             mTime = (TextView) mView.findViewById(R.id.list_item_entry_title);
             mSubject = (TextView) mView.findViewById(R.id.list_item_entry_summary);
         }

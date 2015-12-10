@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,8 @@ public class NoticeActivity extends AppCompatActivity {
     ListView mListView;
     NoticeAdapter mAdapter;
     ProgressDialog mDialog;
+
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,14 @@ public class NoticeActivity extends AppCompatActivity {
         mAdapter = new NoticeAdapter(this);
         mListView.setAdapter(mAdapter);
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.mSwipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showNoticeData(true);
+            }
+        });
+
         FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.mFab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +82,15 @@ public class NoticeActivity extends AppCompatActivity {
             }
         });
 
-        showNoticeData();
+        showNoticeData(false);
     }
 
-    private void showNoticeData() {
+    private void showNoticeData(boolean forceUpdate) {
+        mAdapter.clearData();
+        mAdapter.notifyDataSetChanged();
+
         if (Tools.isOnline(getApplicationContext())) {
-            if (Tools.isWifi(getApplicationContext())) {
+            if (Tools.isWifi(getApplicationContext()) || forceUpdate) {
                 getNoticeDownloadTask mTask = new getNoticeDownloadTask();
                 mTask.execute("https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=680150763&single=true");
             } else {
@@ -113,6 +127,9 @@ public class NoticeActivity extends AppCompatActivity {
             builder.setPositiveButton(android.R.string.ok, null);
             builder.show();
         }
+
+        if (mSwipeRefreshLayout.isRefreshing())
+            mSwipeRefreshLayout.setRefreshing(false);
     }
 
     class getNoticeDownloadTask extends GoogleSheetTask {
@@ -186,6 +203,9 @@ public class NoticeActivity extends AppCompatActivity {
         }
 
         mAdapter.notifyDataSetChanged();
+
+        if (mSwipeRefreshLayout.isRefreshing())
+            mSwipeRefreshLayout.setRefreshing(false);
     }
 
 }

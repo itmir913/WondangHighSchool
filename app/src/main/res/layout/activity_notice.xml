@@ -16,13 +16,20 @@
         tools:context=".activity.notice.NoticeActivity"
         tools:showIn="@layout/activity_notice">
 
-        <ListView
-            android:id="@+id/mListView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/mSwipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="5dp"
-            android:padding="10dp" />
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/mListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="5dp"
+                android:padding="10dp" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
