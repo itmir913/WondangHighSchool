@@ -28,7 +28,7 @@ public class ExamTimeAdapter extends RecyclerView.Adapter<ExamTimeAdapter.ExamTi
 
     @Override
     public ExamTimeAdapter.ExamTimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_schedule_item, parent, false);
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_exam_item, parent, false);
 
         return new ExamTimeViewHolder(mView);
     }
@@ -37,7 +37,7 @@ public class ExamTimeAdapter extends RecyclerView.Adapter<ExamTimeAdapter.ExamTi
     public void onBindViewHolder(final ExamTimeViewHolder holder, int position) {
         ExamTimeInfo mInfo = getItemData(position);
 
-        holder.mTime.setText(String.format(holder.mContext.getString(R.string.exam_order), mInfo.time));
+        holder.mTime.setText(String.valueOf(mInfo.time));
         holder.mSubject.setText(mInfo.subject);
     }
 

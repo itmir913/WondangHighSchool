@@ -152,7 +152,6 @@
     <string name="title_activity_exam_range">시험 시간표</string>
     <string name="message_activity_exam_range">시험 시간표를 확인합니다.</string>
     <string name="exam_time_title">%1$d학년 %2$s %3$s %4$s 시간표</string><!-- 1학년 과중 2학기 기말 시간표 -->
-    <string name="exam_order">%1$d교시</string>
     <string name="no_exam_db_title">시험 시간표 DB 없음</string>
     <string name="no_exam_db_message">시험 시간표 DB가 없습니다, 다운로드 하시겠습니까?</string>
 

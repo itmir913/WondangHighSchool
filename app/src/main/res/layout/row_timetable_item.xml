@@ -13,31 +13,28 @@
 
         <TextView
             android:id="@+id/mTimeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:paddingRight="16dp"
+            android:textSize="35sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="30sp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/mTimeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="체육"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
                 android:id="@+id/mRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="강당"
-                android:textSize="20sp" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 
