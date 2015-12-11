@@ -36,7 +36,7 @@ public class ScheduleFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recyclerview, container, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 
-        final ScheduleAdapter mAdapter = new ScheduleAdapter(getActivity());
+        final ScheduleAdapter mAdapter = new ScheduleAdapter();
         recyclerView.setAdapter(mAdapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
@@ -156,10 +156,10 @@ public class ScheduleFragment extends Fragment {
                 mAdapter.addItem("2학기 2회고사 (1,2학년)", "2015.12.03 (목)");
                 mAdapter.addItem("졸업 사정회 (3학년)", "2015.12.07 (월)");
                 mAdapter.addItem("한마음 으뜸제", "2015.12.16 (수)");
-                mAdapter.addItem("겨울 방학식", "2015.12.18 (금)");
+                mAdapter.addItem("겨울 방학식", "2015.12.18 (금)", true);
                 break;
             case 1:
-                mAdapter.addItem("신정", "2016.01.01 (금)");
+                mAdapter.addItem("신정", "2016.01.01 (금)", true);
                 break;
             case 2:
                 mAdapter.addItem("개학식", "2016.02.01 (월)");

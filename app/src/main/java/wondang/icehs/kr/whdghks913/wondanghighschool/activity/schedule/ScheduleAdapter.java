@@ -1,8 +1,8 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.schedule;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +16,21 @@ import wondang.icehs.kr.whdghks913.wondanghighschool.R;
  * Created by whdghks913 on 2015-12-10.
  */
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
-    private int mBackground;
+    //    private int mBackground;
     private ArrayList<ScheduleInfo> mValues = new ArrayList<>();
 
-    public ScheduleAdapter(Context mContext) {
-        TypedValue mTypedValue = new TypedValue();
-        mContext.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
-        mBackground = mTypedValue.resourceId;
-    }
+//    public ScheduleAdapter(Context mContext) {
+//        TypedValue mTyp/edValue = new TypedValue();
+//        mContext.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
+//        mBackground = mTypedValue.resourceId;
+//    }
 
     public void addItem(String mSchedule, String mDate) {
         ScheduleInfo addInfo = new ScheduleInfo();
 
         addInfo.date = mDate;
         addInfo.schedule = mSchedule;
+        addInfo.isHoliday = false;
 
         mValues.add(addInfo);
     }
@@ -39,6 +40,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
         addInfo.date = mDate;
         addInfo.schedule = mSchedule;
+        addInfo.isHoliday = isHoliday;
 
         mValues.add(addInfo);
     }
@@ -46,7 +48,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public ScheduleAdapter.ScheduleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_schedule_item, parent, false);
-        mView.setBackgroundResource(mBackground);
+//        mView.setBackgroundResource(mBackground);
 
         return new ScheduleViewHolder(mView);
     }
@@ -57,6 +59,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
         holder.mDate.setText(mInfo.date);
         holder.mSchedule.setText(mInfo.schedule);
+
+        if (mInfo.isHoliday) {
+            holder.mDate.setTextColor(Color.RED);
+        } else {
+            holder.mDate.setTextColor(ContextCompat.getColor(holder.mDate.getContext(), R.color.colorSecondaryText));
+        }
     }
 
     @Override
@@ -84,5 +92,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public class ScheduleInfo {
         public String date;
         public String schedule;
+        public boolean isHoliday;
     }
 }
