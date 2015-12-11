@@ -110,6 +110,7 @@ public class NoticeActivity extends AppCompatActivity {
                         mTask.execute("https://docs.google.com/spreadsheets/d/1s-_F2vNNQ0yTBuqu_NORbeCJGBoaEHvsA4i84IBKWfA/pubhtml?gid=680150763&single=true");
                     }
                 });
+                builder.setCancelable(false);
                 builder.show();
             }
         } else {

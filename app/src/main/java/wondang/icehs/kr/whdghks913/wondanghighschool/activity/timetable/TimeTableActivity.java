@@ -162,6 +162,7 @@ public class TimeTableActivity extends AppCompatActivity {
                         downloadStart();
                     }
                 });
+                builder.setCancelable(false);
                 builder.show();
             }
         } else {

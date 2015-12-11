@@ -129,6 +129,7 @@ public class ExamTimeActivity extends AppCompatActivity {
                         downloadStart();
                     }
                 });
+                builder.setCancelable(false);
                 builder.show();
             }
         } else {
