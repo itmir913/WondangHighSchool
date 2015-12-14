@@ -113,10 +113,8 @@ public class BapActivity extends AppCompatActivity {
     private void getBapList(boolean isUpdate) {
         boolean isNetwork = Tools.isOnline(this);
 
-        if (isNetwork) {
-            mAdapter.clearData();
-            mAdapter.notifyDataSetChanged();
-        }
+        mAdapter.clearData();
+        mAdapter.notifyDataSetChanged();
 
         getCalendarInstance(false);
 
