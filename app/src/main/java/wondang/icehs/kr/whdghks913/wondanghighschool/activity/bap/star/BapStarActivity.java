@@ -39,8 +39,8 @@ import java.util.Vector;
 
 import itmir.tistory.com.spreadsheets.GoogleSheetTask;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Database;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
 
@@ -56,7 +56,6 @@ public class BapStarActivity extends AppCompatActivity {
     RatingBar mLunchRatingStar, mDinnerRatingStar;
     ListView mLunchListView, mDinnerListView;
     BapStarShowAdapter mLunchAdapter, mDinnerAdapter;
-    Preference mPref;
     int year, month, day;
     TextView lunchPeopleCount, dinnerPeopleCount;
 
@@ -125,14 +124,9 @@ public class BapStarActivity extends AppCompatActivity {
 
     public void postStar(View v) {
         // 0 : Lunch, 1 : Dinner
-        mPref = new Preference(this, "RateStarInfo");
-        String lunchKey = "LunchStar_" + year + month + day;
-        String dinnerKey = "DinnerStar_" + year + month + day;
-        boolean lunch = mPref.getBoolean(lunchKey, true);
-        boolean dinner = mPref.getBoolean(dinnerKey, true);
-
         int position = mGiveStarType.getSelectedItemPosition();
-        if ((position == 0 && lunch) || ((position == 1 && dinner))) {
+
+        if (BapTool.canPostStar(getApplicationContext(), position)) {
             float rate = mPostRatingBar.getRating();
             (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString());
         } else {
@@ -226,15 +220,7 @@ public class BapStarActivity extends AppCompatActivity {
                 builder.setPositiveButton(android.R.string.ok, null);
                 builder.show();
 
-                if (mPref == null)
-                    mPref = new Preference(getApplicationContext(), "RateStarInfo");
-                String lunchKey = "LunchStar_" + year + month + day;
-                String dinnerKey = "DinnerStar_" + year + month + day;
-                if (value == 0) {
-                    mPref.putBoolean(lunchKey, false);
-                } else {
-                    mPref.putBoolean(dinnerKey, false);
-                }
+                BapTool.todayPostStar(getApplicationContext(), value);
             }
         }
     }

@@ -29,6 +29,36 @@ public class BapTool {
         return year + "-" + month + "-" + day + "-" + type;
     }
 
+    public static boolean canPostStar(Context mContext, int type) {
+        Calendar mCalendar = Calendar.getInstance();
+        int year = mCalendar.get(Calendar.YEAR);
+        int month = mCalendar.get(Calendar.MONTH);
+        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
+
+        Preference mPref = new Preference(mContext, "RateStarInfo");
+        String lunchKey = "LunchStar_" + year + month + day;
+        String dinnerKey = "DinnerStar_" + year + month + day;
+
+        return ((type == 0) && mPref.getBoolean(lunchKey, true)) || ((type == 1) && mPref.getBoolean(dinnerKey, true));
+    }
+
+    public static void todayPostStar(Context mContext, int type) {
+        Calendar mCalendar = Calendar.getInstance();
+        int year = mCalendar.get(Calendar.YEAR);
+        int month = mCalendar.get(Calendar.MONTH);
+        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
+
+        Preference mPref = new Preference(mContext, "RateStarInfo");
+        String lunchKey = "LunchStar_" + year + month + day;
+        String dinnerKey = "DinnerStar_" + year + month + day;
+
+        if (type == 0) {
+            mPref.putBoolean(lunchKey, false);
+        } else {
+            mPref.putBoolean(dinnerKey, false);
+        }
+    }
+
     /**
      * Pref Name Format : 2015-02-17-TYPE_index
      * ex) 2015-02-17-1_3
