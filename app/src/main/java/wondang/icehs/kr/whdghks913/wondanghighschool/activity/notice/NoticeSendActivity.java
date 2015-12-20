@@ -23,6 +23,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.Vector;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.HiddenCode;
 
 public class NoticeSendActivity extends AppCompatActivity {
     EditText mTitle, mMessage;
@@ -94,12 +95,15 @@ public class NoticeSendActivity extends AppCompatActivity {
             try {
                 HttpPost postRequest = new HttpPost("https://script.google.com/macros/s/AKfycbwR755X_mEWKZ8LKQuQf81t5rVerzOLCg1ztZyHisNr7rB8rIo/exec");
 
+
                 //전달할 값들
                 Vector<NameValuePair> nameValue = new Vector<>();
                 nameValue.add(new BasicNameValuePair("sheet_name", "Notice"));
                 nameValue.add(new BasicNameValuePair("title", params[0]));
                 nameValue.add(new BasicNameValuePair("message", params[1]));
                 nameValue.add(new BasicNameValuePair("deviceId", Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID)));
+
+                nameValue.add(new BasicNameValuePair("code", HiddenCode.getHiddenCode()));
 
                 //웹 접속 - UTF-8으로
                 HttpEntity Entity = new UrlEncodedFormEntity(nameValue, "UTF-8");
