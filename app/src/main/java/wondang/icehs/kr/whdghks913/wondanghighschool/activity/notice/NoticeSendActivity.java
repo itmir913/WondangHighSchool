@@ -50,7 +50,7 @@ public class NoticeSendActivity extends AppCompatActivity {
             });
         }
 
-        boolean isAdmin = getIntent().getBooleanExtra("userAdmin", false);
+        boolean isAdmin = getIntent().getBooleanExtra("userAdmin_1", false);
         if (!isAdmin)
             finish();
 

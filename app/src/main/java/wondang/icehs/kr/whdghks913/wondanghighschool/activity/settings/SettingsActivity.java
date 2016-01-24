@@ -10,6 +10,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -56,12 +57,15 @@ public class SettingsActivity extends AppCompatActivity {
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.pref_settings);
 
-            boolean isAdmin = getPreferenceManager().getSharedPreferences().getBoolean("userAdmin", false);
+            boolean isAdmin = getPreferenceManager().getSharedPreferences().getBoolean("userAdmin_1", false);
             if (isAdmin) {
                 Preference proUpgrade = findPreference("proUpgrade");
                 proUpgrade.setSummary(R.string.user_info_licensed);
                 proUpgrade.setEnabled(false);
             }
+
+            findPreference("myDeviceId")
+                    .setSummary(Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID));
 
             setOnPreferenceClick(findPreference("infoAutoUpdate"));
             setOnPreferenceClick(findPreference("openSource"));
@@ -116,8 +120,8 @@ public class SettingsActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             String value = input.getText().toString();
                             SecurityXor securityXor = new SecurityXor();
-                            if ("Aleef^f{eM".equals(securityXor.getSecurityXor(value, 777))) {
-                                getPreferenceManager().getSharedPreferences().edit().putBoolean("userAdmin", true).commit();
+                            if ("^fgmhgnAz".equals(securityXor.getSecurityXor(value, 777))) {
+                                getPreferenceManager().getSharedPreferences().edit().putBoolean("userAdmin_1", true).commit();
                             }
                         }
                     });

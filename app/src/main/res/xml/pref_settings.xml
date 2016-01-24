@@ -88,6 +88,10 @@
             android:key="proUpgrade"
             android:summary="학생 등급입니다."
             android:title="사용자 등급 안내" />
+        <Preference
+            android:enabled="false"
+            android:key="myDeviceId"
+            android:title="기기 코드" />
     </PreferenceCategory>
 
 </PreferenceScreen>

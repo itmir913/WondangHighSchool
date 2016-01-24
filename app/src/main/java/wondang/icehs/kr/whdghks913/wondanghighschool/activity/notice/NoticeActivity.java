@@ -56,7 +56,7 @@ public class NoticeActivity extends AppCompatActivity {
             });
         }
 
-        isAdmin = new Preference(getApplicationContext()).getBoolean("userAdmin", false);
+        isAdmin = new Preference(getApplicationContext()).getBoolean("userAdmin_1", false);
 
         mListView = (ListView) findViewById(R.id.mListView);
         mAdapter = new NoticeAdapter(this);
@@ -71,11 +71,14 @@ public class NoticeActivity extends AppCompatActivity {
         });
 
         FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.mFab);
+        if (isAdmin) {
+            mFab.setVisibility(View.VISIBLE);
+        }
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isAdmin) {
-                    startActivity(new Intent(getApplicationContext(), NoticeSendActivity.class).putExtra("userAdmin", true));
+                    startActivity(new Intent(getApplicationContext(), NoticeSendActivity.class).putExtra("userAdmin_1", true));
                 } else {
                     Snackbar.make(view, R.string.user_info_require_message, Snackbar.LENGTH_SHORT).show();
                 }

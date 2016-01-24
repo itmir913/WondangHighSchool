@@ -42,6 +42,7 @@ import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Database;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.HiddenCode;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
 
@@ -166,6 +167,10 @@ public class BapStarActivity extends AppCompatActivity {
                 nameValue.add(new BasicNameValuePair("deviceId", Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID)));
 
                 nameValue.add(new BasicNameValuePair("code", HiddenCode.getHiddenCode()));
+
+                Preference mPref = new Preference(getApplicationContext());
+                nameValue.add(new BasicNameValuePair("grade", Integer.toString(mPref.getInt("myGrade", -1))));
+                nameValue.add(new BasicNameValuePair("class", Integer.toString(mPref.getInt("myClass", -1))));
 
                 //웹 접속 - UTF-8으로
                 HttpEntity Entity = new UrlEncodedFormEntity(nameValue, "UTF-8");
