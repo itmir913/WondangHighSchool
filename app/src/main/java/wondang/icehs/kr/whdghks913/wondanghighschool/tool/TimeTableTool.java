@@ -90,7 +90,7 @@ public class TimeTableTool {
 
             if (mSubject != null && !mSubject.isEmpty()
                     && mSubject.contains("\n"))
-                mSubject = mSubject.replace("\n ", " (") + ")";
+                mSubject = mSubject.replace("\n", " (") + ")";
 
             subject[period] = mSubject;
             room[period] = mRoom;
@@ -179,7 +179,7 @@ public class TimeTableTool {
 
             if (mSubject != null && !mSubject.isEmpty()
                     && mSubject.contains("\n"))
-                mSubject = mSubject.replace("\n ", " (") + ")";
+                mSubject = mSubject.replace("\n", " (") + ")";
 
             mTimeTable += Integer.toString(period + 1) + ". " + mSubject;
 
