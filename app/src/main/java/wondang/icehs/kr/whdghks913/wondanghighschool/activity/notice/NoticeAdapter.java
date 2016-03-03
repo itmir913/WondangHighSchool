@@ -42,7 +42,7 @@ public class NoticeAdapter extends BaseAdapter {
         addItemInfo.message = message;
         addItemInfo.date = date;
 
-        mListData.add(addItemInfo);
+        mListData.add(0, addItemInfo);
     }
 
     public void clearData() {
