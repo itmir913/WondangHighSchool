@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -52,12 +51,12 @@ public class BapStarActivity extends AppCompatActivity {
 
     Spinner mGiveStarType;
     RatingBar mPostRatingBar;
-    EditText mBapReview;
+//    EditText mBapReview;
 
     Spinner mDateSpinner;
     RatingBar mLunchRatingStar, mDinnerRatingStar;
-    ListView mLunchListView, mDinnerListView;
-    BapStarShowAdapter mLunchAdapter, mDinnerAdapter;
+//    ListView mLunchListView, mDinnerListView;
+//    BapStarShowAdapter mLunchAdapter, mDinnerAdapter;
     int year, month, day;
     TextView lunchPeopleCount, dinnerPeopleCount;
 
@@ -97,7 +96,7 @@ public class BapStarActivity extends AppCompatActivity {
 
             mGiveStarType = (Spinner) findViewById(R.id.mGiveStarType);
             mPostRatingBar = (RatingBar) findViewById(R.id.mPostRatingBar);
-            mBapReview = (EditText) findViewById(R.id.mBapReview);
+//            mBapReview = (EditText) findViewById(R.id.mBapReview);
 
         } else if (starType == 2) {
             giveStarLayout.setVisibility(View.GONE);
@@ -106,19 +105,19 @@ public class BapStarActivity extends AppCompatActivity {
             mDateSpinner = (Spinner) findViewById(R.id.mDateSpinner);
             mLunchRatingStar = (RatingBar) findViewById(R.id.mLunchRatingStar);
             mDinnerRatingStar = (RatingBar) findViewById(R.id.mDinnerRatingStar);
-            mLunchListView = (ListView) findViewById(R.id.mLunchListView);
-            mDinnerListView = (ListView) findViewById(R.id.mDinnerListView);
+//            mLunchListView = (ListView) findViewById(R.id.mLunchListView);
+//            mDinnerListView = (ListView) findViewById(R.id.mDinnerListView);
             lunchPeopleCount = (TextView) findViewById(R.id.lunchPeopleCount);
             dinnerPeopleCount = (TextView) findViewById(R.id.dinnerPeopleCount);
-            mLunchAdapter = new BapStarShowAdapter(this);
-            mDinnerAdapter = new BapStarShowAdapter(this);
+//            mLunchAdapter = new BapStarShowAdapter(this);
+//            mDinnerAdapter = new BapStarShowAdapter(this);
             Calendar mCalendar = Calendar.getInstance();
             year = mCalendar.get(Calendar.YEAR);
             month = mCalendar.get(Calendar.MONTH);
             day = mCalendar.get(Calendar.DAY_OF_MONTH);
 
-            mLunchListView.setAdapter(mLunchAdapter);
-            mDinnerListView.setAdapter(mDinnerAdapter);
+//            mLunchListView.setAdapter(mLunchAdapter);
+//            mDinnerListView.setAdapter(mDinnerAdapter);
 
             showRiceStar();
         }
@@ -130,7 +129,7 @@ public class BapStarActivity extends AppCompatActivity {
 
         if (BapTool.canPostStar(getApplicationContext(), position)) {
             float rate = mPostRatingBar.getRating();
-            (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), mBapReview.getText().toString());
+            (new HttpTask()).execute(String.valueOf(position), String.valueOf(rate), null);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AppCompatErrorAlertDialogStyle);
             builder.setTitle(R.string.bap_star_once_title);
@@ -163,7 +162,7 @@ public class BapStarActivity extends AppCompatActivity {
                 nameValue.add(new BasicNameValuePair("sheet_name", "RiceStar"));
                 nameValue.add(new BasicNameValuePair("type", params[0]));
                 nameValue.add(new BasicNameValuePair("rate", params[1]));
-                nameValue.add(new BasicNameValuePair("memo", params[2]));
+//                nameValue.add(new BasicNameValuePair("memo", params[2]));
                 nameValue.add(new BasicNameValuePair("deviceId", Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID)));
 
                 nameValue.add(new BasicNameValuePair("code", HiddenCode.getHiddenCode()));
@@ -220,7 +219,7 @@ public class BapStarActivity extends AppCompatActivity {
                 builder.show();
 
             } else {
-                mBapReview.setText("");
+//                mBapReview.setText("");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BapStarActivity.this, R.style.AppCompatAlertDialogStyle);
                 builder.setTitle(R.string.post_bap_star_title);
@@ -367,8 +366,8 @@ public class BapStarActivity extends AppCompatActivity {
     }
 
     private void getDatabaseData(String dateName) {
-        mLunchAdapter.clearData();
-        mDinnerAdapter.clearData();
+//        mLunchAdapter.clearData();
+//        mDinnerAdapter.clearData();
 
         Database mDatabase = new Database();
         mDatabase.openDatabase(TimeTableTool.mFilePath, StarRateDBName);
@@ -384,18 +383,18 @@ public class BapStarActivity extends AppCompatActivity {
             if (!date.equals(dateName))
                 continue;
 
-            String memo = mCursor.getString(4);
+//            String memo = mCursor.getString(4);
             int type = Integer.parseInt(mCursor.getString(2));
             int rate = Integer.parseInt(mCursor.getString(3));
 
             if (type == 0) {
-                if (!memo.isEmpty() || memo.length() != 0)
-                    mLunchAdapter.addItem(memo);
+//                if (!memo.isEmpty() || memo.length() != 0)
+//                    mLunchAdapter.addItem(memo);
                 sumLunch += rate;
                 lunchCount += 1;
             } else {
-                if (!memo.isEmpty() || memo.length() != 0)
-                    mDinnerAdapter.addItem(memo);
+//                if (!memo.isEmpty() || memo.length() != 0)
+//                    mDinnerAdapter.addItem(memo);
                 sumDinner += rate;
                 dinnerCount += 1;
             }
@@ -423,30 +422,30 @@ public class BapStarActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
-        mLunchAdapter.notifyDataSetChanged();
-        mDinnerAdapter.notifyDataSetChanged();
+//        mLunchAdapter.notifyDataSetChanged();
+//        mDinnerAdapter.notifyDataSetChanged();
 
-        setDynamicHeight(mLunchListView);
-        setDynamicHeight(mDinnerListView);
+//        setDynamicHeight(mLunchListView);
+//        setDynamicHeight(mDinnerListView);
     }
 
-    private void setDynamicHeight(ListView mListView) {
-        ListAdapter mListAdapter = mListView.getAdapter();
-        if (mListAdapter == null)
-            return;
-
-        int height = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(mListView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        for (int i = 0; i < mListAdapter.getCount(); i++) {
-            View listItem = mListAdapter.getView(i, null, mListView);
-            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            height += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = mListView.getLayoutParams();
-        params.height = height + (mListView.getDividerHeight() * (mListAdapter.getCount() - 1));
-        mListView.setLayoutParams(params);
-        mListView.requestLayout();
-    }
+//    private void setDynamicHeight(ListView mListView) {
+//        ListAdapter mListAdapter = mListView.getAdapter();
+//        if (mListAdapter == null)
+//            return;
+//
+//        int height = 0;
+//        int desiredWidth = View.MeasureSpec.makeMeasureSpec(mListView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+//        for (int i = 0; i < mListAdapter.getCount(); i++) {
+//            View listItem = mListAdapter.getView(i, null, mListView);
+//            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+//            height += listItem.getMeasuredHeight();
+//        }
+//
+//        ViewGroup.LayoutParams params = mListView.getLayoutParams();
+//        params.height = height + (mListView.getDividerHeight() * (mListAdapter.getCount() - 1));
+//        mListView.setLayoutParams(params);
+//        mListView.requestLayout();
+//    }
 
 }
