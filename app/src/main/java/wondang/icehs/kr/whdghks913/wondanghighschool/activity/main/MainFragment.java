@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
@@ -63,7 +64,8 @@ public class MainFragment extends Fragment {
                             startActivity(new Intent(getActivity(), NoticeActivity.class));
                             break;
                         case 1:
-                            startActivity(new Intent(getActivity(), ScheduleActivity.class));
+                            Toast.makeText(getActivity(), "2016년 일정 준비중..", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(getActivity(), ScheduleActivity.class));
                             break;
                         case 2:
                             startActivity(new Intent(getActivity(), ExamTimeActivity.class));
