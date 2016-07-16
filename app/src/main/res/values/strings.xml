@@ -130,7 +130,7 @@
 \n- 시험 시간표를 확인할 수 있는 기능 추가</string>
     <!-- 업데이트 안내 -->
     <string name="update_notification_title">시험 시간표 업데이트</string>
-    <string name="update_notification_message">2016년 중간고사 시간표가 업데이트되었습니다.
+    <string name="update_notification_message">2016년 기말고사 시간표가 업데이트되었습니다.
 \n교내정보 - 시험 시간표에 들어간 뒤 오른쪽 아래의 업데이트 버튼을 눌러 정보를 다운로드하세요.</string>
     <string name="user_info_licensed">관리자 등급이 활성화되었습니다.</string>
     <string name="user_info_require_message">게시글 작성을 위해서 관리자 권한이 필요합니다.</string>
