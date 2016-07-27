@@ -1,5 +1,5 @@
 #Android Meal Library with Mir(whdghks913)
-##VERSION 6 (UPDATE 20150225)
+##VERSION 7 (UPDATE 20160727)
 
 ***
 
@@ -32,7 +32,14 @@ AsyncTask를 사용하여 라이브러리를 사용해 주세요, 어떻게 쓰�
 
 
 
-###업데이트 안내
+###VERSION 7 업데이트 안내
+- 나이스 홈페이지 주소 변경에 따라 http://hes를 http://stu로 변경
+
+
+
+
+
+###VERSION 6 업데이트 안내
 - 나이스 홈페이지 구조 변경에 따라 새로운 파싱 방법 사용
 - getDateNew(), getKcalNew(), getMealNew(), getPeopleNew() 사용가능
 - 기존 메소드인 getDate(), getKcal(), getMeal(), getMonthMeal(), getPeople()은 삭제됨

@@ -27,7 +27,7 @@ public class MealLibrary {
                                       String schulCrseScCode, String schulKndScCode, String schMmealScCode) {
 
         String[] date = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode;
@@ -40,7 +40,7 @@ public class MealLibrary {
                                       String schMmealScCode, String year, String month, String day) {
 
         String[] date = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode
@@ -84,7 +84,7 @@ public class MealLibrary {
     public static String[] getKcalNew(String CountryCode, String schulCode,
                                       String schulCrseScCode, String schulKndScCode, String schMmealScCode) {
         String[] content = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode;
@@ -96,7 +96,7 @@ public class MealLibrary {
                                       String schulCrseScCode, String schulKndScCode,
                                       String schMmealScCode, String year, String month, String day) {
         String[] content = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode
@@ -155,7 +155,7 @@ public class MealLibrary {
                                       String schulCrseScCode, String schulKndScCode, String schMmealScCode) {
 
         String[] content = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode;
@@ -168,7 +168,7 @@ public class MealLibrary {
                                       String schMmealScCode, String year, String month, String day) {
 
         String[] content = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode
@@ -227,7 +227,7 @@ public class MealLibrary {
     public static String[] getPeopleNew(String CountryCode, String schulCode,
                                         String schulCrseScCode, String schulKndScCode, String schMmealScCode) {
         String[] content = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode;
@@ -239,7 +239,7 @@ public class MealLibrary {
                                         String schulCrseScCode, String schulKndScCode,
                                         String schMmealScCode, String year, String month, String day) {
         String[] content = new String[7];
-        String url = "http://hes." + CountryCode
+        String url = "http://stu." + CountryCode
                 + "/sts_sci_md01_001.do?schulCode=" + schulCode
                 + "&schulCrseScCode=" + schulCrseScCode + "&schulKndScCode="
                 + schulKndScCode + "&schMmealScCode=" + schMmealScCode
