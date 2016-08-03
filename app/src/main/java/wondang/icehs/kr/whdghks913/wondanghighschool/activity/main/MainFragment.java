@@ -14,7 +14,6 @@ import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.BapActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.exam.ExamTimeActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.notice.NoticeActivity;
-import wondang.icehs.kr.whdghks913.wondanghighschool.activity.schedule.ScheduleActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable.TimeTableActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;

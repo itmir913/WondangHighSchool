@@ -12,12 +12,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,7 +52,7 @@ public class BapStarActivity extends AppCompatActivity {
 
     Spinner mDateSpinner;
     RatingBar mLunchRatingStar, mDinnerRatingStar;
-//    ListView mLunchListView, mDinnerListView;
+    //    ListView mLunchListView, mDinnerListView;
 //    BapStarShowAdapter mLunchAdapter, mDinnerAdapter;
     int year, month, day;
     TextView lunchPeopleCount, dinnerPeopleCount;
@@ -287,8 +284,6 @@ public class BapStarActivity extends AppCompatActivity {
 
             new File(TimeTableTool.mFilePath + StarRateDBName).delete();
             mDatabase = new Database();
-
-            this.startRowNumber = 0;
         }
 
         @Override

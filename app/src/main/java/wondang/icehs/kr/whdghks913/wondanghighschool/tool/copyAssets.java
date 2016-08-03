@@ -27,15 +27,15 @@ public class copyAssets {
         AssetManager mAssetM = mContext.getResources().getAssets();
         InputStream mInput = null;
         FileOutputStream mOutput = null;
-        long filesize = 0;
+        long file_size = 0;
         dbFile.delete();
 
         try {
             mInput = mAssetM.open(mFileName, AssetManager.ACCESS_BUFFER);
-            filesize = mInput.available();
+            file_size = mInput.available();
 
             if (dbFile.length() <= 0) {
-                byte[] tmpbyte = new byte[(int) filesize];
+                byte[] tmpbyte = new byte[(int) file_size];
                 mInput.read(tmpbyte);
                 dbFile.createNewFile();
                 mOutput = new FileOutputStream(dbFile);

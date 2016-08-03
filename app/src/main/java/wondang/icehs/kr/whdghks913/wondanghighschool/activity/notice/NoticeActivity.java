@@ -150,8 +150,6 @@ public class NoticeActivity extends AppCompatActivity {
 
             new File(TimeTableTool.mFilePath + NoticeDBName).delete();
             mDatabase = new Database();
-
-            this.startRowNumber = 0;
         }
 
         @Override

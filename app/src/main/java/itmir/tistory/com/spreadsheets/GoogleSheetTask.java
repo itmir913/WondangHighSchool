@@ -20,8 +20,8 @@ public abstract class GoogleSheetTask extends AsyncTask<String, Integer, Long> {
      * | | | | | Column
      * | | | | | Column
      */
-    public int startRowNumber = 0;
-    public int startColumnNumber = 0;
+    private int startRowNumber = 0;
+    private int startColumnNumber = 0;
 
     public abstract void onPreDownload();
 
@@ -30,6 +30,14 @@ public abstract class GoogleSheetTask extends AsyncTask<String, Integer, Long> {
     public abstract void onFinish(long result);
 
     public abstract void onRow(int startRowNumber, int position, String[] row);
+
+    protected void setStartRowNumber(int startRowNumber) {
+        this.startRowNumber = startRowNumber;
+    }
+
+    public void setStartColumnNumber(int startColumnNumber) {
+        this.startColumnNumber = startColumnNumber;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -63,7 +71,7 @@ public abstract class GoogleSheetTask extends AsyncTask<String, Integer, Long> {
                         Element data = td.get(j);
                         String mRow = data.getContent().toString().trim();
                         mRow = mRow.replace("<br>", "\n");
-                        sheetData[j] = RemoveHTMLTag(mRow);
+                        sheetData[j] = removeHTMLTag(mRow);
                     }
 
                     onRow(startRowNumber, i, sheetData);
@@ -75,9 +83,9 @@ public abstract class GoogleSheetTask extends AsyncTask<String, Integer, Long> {
             Log.e("GoogleSheetTask Error", "LocalizedMessage : " + e.getLocalizedMessage());
 
             e.printStackTrace();
-            return -1l;
+            return -1L;
         }
-        return 0l;
+        return 0L;
     }
 
     @Override
@@ -91,7 +99,7 @@ public abstract class GoogleSheetTask extends AsyncTask<String, Integer, Long> {
         onFinish(result);
     }
 
-    public String RemoveHTMLTag(String changeStr) {
+    private String removeHTMLTag(String changeStr) {
         if (changeStr != null && !changeStr.equals("")) {
             changeStr = changeStr.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
         } else {

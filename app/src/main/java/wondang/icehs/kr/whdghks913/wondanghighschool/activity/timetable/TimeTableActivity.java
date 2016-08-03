@@ -233,8 +233,6 @@ public class TimeTableActivity extends AppCompatActivity {
             mDialog.show();
 
             mDatabase = new Database();
-
-            this.startRowNumber = 0;
         }
 
         @Override

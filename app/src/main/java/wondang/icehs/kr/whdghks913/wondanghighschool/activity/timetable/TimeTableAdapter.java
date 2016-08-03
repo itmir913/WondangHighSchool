@@ -2,7 +2,6 @@ package wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

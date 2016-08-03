@@ -11,7 +11,7 @@ import toast.library.meal.MealLibrary;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 
 /**
- * Created by 종환 on 2015-02-17.
+ * Created by whdghks913 on 2015-02-17.
  */
 public class BapTool {
     public static final String BAP_PREFERENCE_NAME = "BapData";

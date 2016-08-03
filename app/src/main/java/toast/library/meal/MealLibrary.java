@@ -292,7 +292,6 @@ public class MealLibrary {
 
     /**
      * isMealCheck
-     * <p>
      * meal이 "", " ", null이면 false, 아니면 true
      */
     public static boolean isMealCheck(String meal) {
