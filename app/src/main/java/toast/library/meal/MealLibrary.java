@@ -4,7 +4,6 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -52,8 +51,8 @@ public class MealLibrary {
     private static String[] getDateNewSub(String[] date, String url) {
         try {
             mSource = new Source(new URL(url));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,8 +107,8 @@ public class MealLibrary {
     private static String[] getKcalSubNew(String[] content, String url) {
         try {
             mSource = new Source(new URL(url));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -180,8 +179,8 @@ public class MealLibrary {
     private static String[] getMealNewSub(String[] content, String url) {
         try {
             mSource = new Source(new URL(url));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -251,8 +250,8 @@ public class MealLibrary {
     private static String[] getPeopleSubNew(String[] content, String url) {
         try {
             mSource = new Source(new URL(url));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -293,7 +292,7 @@ public class MealLibrary {
 
     /**
      * isMealCheck
-     *
+     * <p>
      * meal이 "", " ", null이면 false, 아니면 true
      */
     public static boolean isMealCheck(String meal) {
