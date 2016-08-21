@@ -129,9 +129,9 @@
 \n- 학생회 공지사항을 표시할 수 있는 기능 추가
 \n- 시험 시간표를 확인할 수 있는 기능 추가</string>
     <!-- 업데이트 안내 -->
-    <string name="update_notification_title">급식 파싱 수정</string>
-    <string name="update_notification_message">나이스 홈페이지 주소 변경에 따라
-\n급식 파싱이 안되던 오류를 수정했습니다.</string>
+    <string name="update_notification_title">시간표 업데이트</string>
+    <string name="update_notification_message">시간표를 홈페이지에 올라온 시간표로 변경하였습니다.
+\n시간표 화면에서 오른쪽 아래 버튼을 눌러 업데이트 하세요.</string>
     <string name="user_info_licensed">관리자 등급이 활성화되었습니다.</string>
     <string name="user_info_require_message">게시글 작성을 위해서 관리자 권한이 필요합니다.</string>
     <string name="user_info_class_up_title">관리자 인증 암호를 입력하세요</string>

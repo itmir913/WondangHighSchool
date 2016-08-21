@@ -8,8 +8,8 @@ android {
         applicationId "wondang.icehs.kr.whdghks913.wondanghighschool"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 41
-        versionName "v5.4 2016-07-27"
+        versionCode 42
+        versionName "v5.5 2016-08-21"
     }
     buildTypes {
         release {
