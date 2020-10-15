@@ -1,21 +1,21 @@
-#Android Meal Library with Mir(whdghks913)
-##VERSION 8 (UPDATE 20180212)
+# Android Meal Library with Mir(whdghks913)
+## VERSION 8.1 (UPDATE 20201016)
 
 ***
 
-###사용하는 라이브러리*
+### 사용하는 라이브러리
 * jericho-html-3.3.jar
 
 
 
 
-##How To MealLibrary?
+## How To MealLibrary?
 * [Sample Library 확인하기](https://bitbucket.org/whdghks913/androidmeallibrary)
 * [Android Meal Library Guide](http://itmir.tistory.com/579)
 
 
 
-###주의사항
+### 주의사항
 * 이 MealLibrary.java는 자유롭게 변형해도 됩니다.
 * 그러나 MealLibrary.java가 아닌 이 앱의 모든 코드를 이용할때는 출처와 오픈소스 라이센스를 적어야 합니다.
 * 권장 사항이 아닌 강제 사항입니다.
@@ -25,7 +25,7 @@
 
 
 
-###사용 방법 안내
+### 사용 방법 안내
 static으로 선언하여 어디서든 바로 사용가능합니다
 MealLibrary.(사용할 메소드 이름)으로 급식을 가져올수 있으며 자세한 사용법은 아래에 있습니다
 AsyncTask를 사용하여 라이브러리를 사용해 주세요, 어떻게 쓰는지 모르시면 원당고 앱을 참고해 주세요
@@ -34,20 +34,25 @@ AsyncTask를 사용하여 라이브러리를 사용해 주세요, 어떻게 쓰�
 
 
 
-###VERSION 8 업데이트 안내
+### VERSION 8.1 업데이트 안내
+- Hostname 인증을 올바르게 처리하려면 서버의 호스트 이름이 예상과 다를 때 마다 false를 반환하도록 맞춤 HostnameVerifier 인터페이스에서 verify 방법을 변경.
+
+
+
+### VERSION 8 업데이트 안내
 - 나이스 급식 파싱 주소가 http에서 https로 바뀜에 따라 보안과 관련된 코드를 추가해서 파싱 오류를 수정했습니다.
 - 칼로리 정보를 담고있는 html 태그의 index 번호가 43에서 44로 유동적으로 바뀌는 현상을 발견했고, 이에 대처하기 위한 코드를 추가했습니다.
 - 오류를 분석할 수 있도록 팀뷰어를 비롯한 도움을 주신 분 : 그래픽카드(fkdldjs0101)
 
 
 
-###VERSION 7 업데이트 안내
+### VERSION 7 업데이트 안내
 - 나이스 홈페이지 주소 변경에 따라 http://hes를 http://stu로 변경
 
 
 
 
-###VERSION 6 업데이트 안내
+### VERSION 6 업데이트 안내
 - 나이스 홈페이지 구조 변경에 따라 새로운 파싱 방법 사용
 - getDateNew(), getKcalNew(), getMealNew(), getPeopleNew() 사용가능
 - 기존 메소드인 getDate(), getKcal(), getMeal(), getMonthMeal(), getPeople()은 삭제됨
@@ -65,7 +70,7 @@ AsyncTask를 사용하여 라이브러리를 사용해 주세요, 어떻게 쓰�
 
 ***
 
-###급식 다운로드를 위한 AsyncTask를 지원합니다
+### 급식 다운로드를 위한 AsyncTask를 지원합니다
 원당고 학교앱이 업데이트됨에따라 급식을 가져오는 방법이 변경되었습니다
 아래 방법을 따라하시면 업데이트된 방식을 적용하실수 있습니다
 
@@ -151,11 +156,11 @@ if (mData.isBlankDay) {
 
 ***
 
-##How To Use?
+## How To Use?
 
 
-###Deprecated API
-####MealLibrary.getDate()
+### Deprecated API
+#### MealLibrary.getDate()
 ```java
 MealLibrary.getDate(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode)
 MealLibrary.getDate(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode, String schYmd)
@@ -169,7 +174,7 @@ String[]에서 [0]에는 일요일의 정보가, [6]에는 토요일의 정보�
 
 
 
-####MealLibrary.getMeal()
+#### MealLibrary.getMeal()
 ```java
 MealLibrary.getMeal(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode)
 MealLibrary.getMeal(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode, String schYmd)
@@ -181,7 +186,7 @@ MealLibrary.getMeal(String CountryCode, String schulCode, String schulCrseScCode
 
 
 
-####MealLibrary.getMonthMeal()
+#### MealLibrary.getMonthMeal()
 ```java
 MealLibrary.getMonthMeal(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode, String schYm)
 MealLibrary.getMonthMeal(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode, String year, String month)
@@ -192,7 +197,7 @@ String[]의 길이는 한달 날짜 길이와 같으며, 2월은 윤년을 위�
 
 
 
-####MealLibrary.getKcal()
+#### MealLibrary.getKcal()
 ```java
 MealLibrary.getKcal(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode)
 MealLibrary.getKcal(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode, String schYmd)
@@ -203,7 +208,7 @@ MealLibrary.getKcal(String CountryCode, String schulCode, String schulCrseScCode
 
 
 
-####MealLibrary.getPeople()
+#### MealLibrary.getPeople()
 ```java
 MealLibrary.getPeople(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode)
 MealLibrary.getPeople(String CountryCode, String schulCode, String schulCrseScCode, String schulKndScCode, String schMmealScCode, String schYmd)
@@ -214,8 +219,8 @@ MealLibrary.getPeople(String CountryCode, String schulCode, String schulCrseScCo
 
 
 
-###New API
-####MealLibrary.getDateNew()
+### New API
+#### MealLibrary.getDateNew()
 -----------------------
 ```java
 MealLibrary.getDateNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode)
@@ -224,7 +229,7 @@ MealLibrary.getDateNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, 
 
 
 
-####MealLibrary.getKcalNew()
+#### MealLibrary.getKcalNew()
 ```java
 MealLibrary.getKcalNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode)
 MealLibrary.getKcalNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode, year, month, day)
@@ -232,7 +237,7 @@ MealLibrary.getKcalNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, 
 
 
 
-####MealLibrary.getMealNew()
+#### MealLibrary.getMealNew()
 ```java
 MealLibrary.getMealNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode)
 MealLibrary.getMealNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode, year, month, day)
@@ -240,7 +245,7 @@ MealLibrary.getMealNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, 
 
 
 
-####MealLibrary.getPeopleNew()
+#### MealLibrary.getPeopleNew()
 ```java
 MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode)
 MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode, schMmealScCode, year, month, day)
@@ -248,21 +253,21 @@ MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode
 
 ***
 
-###변수 설명
+### 변수 설명
 
-####CountryCode
+#### CountryCode
 * 학교 교육청 코드, nice홈페이지 도메인과 같습니다
 * EX) 인천 : ice.go.kr
 
 
-####schulCode
+#### schulCode
 * 학교 고유 나이스 코드
 * EX) 인천의 학교 코드 검색 : http://hes.ice.go.kr/sts_sci_si00_001.do (E10000xxxx)
 * 참조 : 중학교 나이스 코드 검색 : http://me2.do/xAY6Zij1
 * 고등학교 나이스 코드 검색 : http://me2.do/G22fDh8l
 
 
-####schulCrseScCode
+#### schulCrseScCode
 * 학교 분류
 * "1" : 병설유치원
 * "2" : 초등학교
@@ -271,7 +276,7 @@ MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode
 * 분류번호랑 종류랑 안맞으면 반환이 안됩니다
 
 
-####schulKndScCode
+#### schulKndScCode
 * 학교 종류
 * "01" : 유치원
 * "02" : 초등학교
@@ -279,14 +284,14 @@ MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode
 * "04" : 고등학교
 
 
-####schMmealScCode
+#### schMmealScCode
 * 반환할 식사 값
 * 조식 : "1"
 * 중식 : "2"
 * 석식 : "3"
 
 
-####schYmd
+#### schYmd
 * 지원 중단
 * 원하는 날짜의 급식 정보를 얻기 위해 필요합니다
 * String 형식 : 년.월.일
@@ -294,7 +299,7 @@ MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode
 * 새로운 New메소드에서는 schYmd을 지원하지 않고, year, month, day만 지원합니다
 
 
-####schYm
+#### schYm
 * 지원 중단
 * 원하는 달의 급식 정보를 얻기 위해 필요합니다
 * String 형식 : 년.월
@@ -302,6 +307,6 @@ MealLibrary.getPeopleNew(CountryCode, schulCode, schulCrseScCode, schulKndScCode
 * 새로운 New메소드에서는 schYm을 지원하지 않고, year, month, day만 지원합니다
 
 
-####year, month, day
+#### year, month, day
 * schYmd와 schYm의 정보를 세분화 해서 각각 정보를 넘겨줄때 사용합니다
 * EX) year = "2014", month = "03", day = "16"
