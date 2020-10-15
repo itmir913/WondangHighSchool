@@ -14,8 +14,9 @@ public class HiddenCode {
      * 빌드시 PrivateCode.java파일을 찾을 수 없다는 오류가 발생됩니다.
      * PrivateCode.MY_HIDDEN_FIRST_CODE, PrivateCode.MY_HIDDEN_SECOND_CODE을 임의의 상수로 바꾸세요.
      */
-    private static final int HIDDEN_FIRST_CODE = PrivateCode.MY_HIDDEN_FIRST_CODE;
-    private static final int HIDDEN_SECOND_CODE = PrivateCode.MY_HIDDEN_SECOND_CODE;
+    // TODO Private Code
+    private static final int HIDDEN_FIRST_CODE = 123;
+    private static final int HIDDEN_SECOND_CODE = 123;
 
     public static String getHiddenCode() {
         BigDecimal bigDecimal = new BigDecimal(getFirstHiddenCode())

@@ -1,7 +1,7 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.main;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +67,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     }
 
     @Override
-    public MainAdapter.MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_main_fragment, parent, false);
 //        mView.setBackgroundResource(mBackground);
 
@@ -97,7 +97,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 //        holder.mView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                // TODO
+//
 //            }
 //        });
     }

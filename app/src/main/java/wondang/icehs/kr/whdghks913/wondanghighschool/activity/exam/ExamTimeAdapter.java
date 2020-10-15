@@ -1,7 +1,7 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.exam;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +27,7 @@ public class ExamTimeAdapter extends RecyclerView.Adapter<ExamTimeAdapter.ExamTi
     }
 
     @Override
-    public ExamTimeAdapter.ExamTimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ExamTimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_exam_item, parent, false);
 
         return new ExamTimeViewHolder(mView);

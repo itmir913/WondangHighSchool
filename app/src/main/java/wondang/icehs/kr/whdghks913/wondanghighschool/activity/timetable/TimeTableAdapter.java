@@ -1,7 +1,7 @@
 package wondang.icehs.kr.whdghks913.wondanghighschool.activity.timetable;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.Time
     }
 
     @Override
-    public TimeTableAdapter.TimeTableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TimeTableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_timetable_item, parent, false);
 //        mView.setBackgroundResource(mBackground);
 

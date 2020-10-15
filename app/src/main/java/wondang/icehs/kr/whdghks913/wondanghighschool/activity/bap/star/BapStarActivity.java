@@ -7,18 +7,13 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-
+import android.widget.*;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import itmir.tistory.com.spreadsheets.GoogleSheetTask;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -26,21 +21,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import wondang.icehs.kr.whdghks913.wondanghighschool.R;
+import wondang.icehs.kr.whdghks913.wondanghighschool.tool.*;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
-
-import itmir.tistory.com.spreadsheets.GoogleSheetTask;
-import wondang.icehs.kr.whdghks913.wondanghighschool.R;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Database;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.HiddenCode;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.TimeTableTool;
-import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
 
 public class BapStarActivity extends AppCompatActivity {
     public static final String StarRateDBName = "RiceStarRate.db";

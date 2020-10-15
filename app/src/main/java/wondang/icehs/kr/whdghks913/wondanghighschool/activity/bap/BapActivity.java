@@ -4,28 +4,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import com.fourmob.datetimepicker.date.DatePickerDialog;
-
-import java.util.Calendar;
-
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import wondang.icehs.kr.whdghks913.wondanghighschool.R;
 import wondang.icehs.kr.whdghks913.wondanghighschool.activity.bap.star.BapStarActivity;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.BapTool;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Preference;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.ProcessTask;
 import wondang.icehs.kr.whdghks913.wondanghighschool.tool.Tools;
+
+import java.util.Calendar;
 
 public class BapActivity extends AppCompatActivity {
 
@@ -181,24 +178,25 @@ public class BapActivity extends AppCompatActivity {
     }
 
     public void setCalenderBap() {
-        getCalendarInstance(false);
-
-        int year = mCalendar.get(Calendar.YEAR);
-        int month = mCalendar.get(Calendar.MONTH);
-        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
-                mCalendar.set(year, month, day);
-                getCalendarInstance(false);
-
-                getBapList(true);
-            }
-        }, year, month, day, false);
-        datePickerDialog.setYearRange(2006, 2030);
-        datePickerDialog.setCloseOnSingleTapDay(false);
-        datePickerDialog.show(getSupportFragmentManager(), "Tag");
+        // TODO DATA TIME PICKER
+//        getCalendarInstance(false);
+//
+//        int year = mCalendar.get(Calendar.YEAR);
+//        int month = mCalendar.get(Calendar.MONTH);
+//        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
+//
+//        DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+//                mCalendar.set(year, month, day);
+//                getCalendarInstance(false);
+//
+//                getBapList(true);
+//            }
+//        }, year, month, day, false);
+//        datePickerDialog.setYearRange(2006, 2030);
+//        datePickerDialog.setCloseOnSingleTapDay(false);
+//        datePickerDialog.show(getSupportFragmentManager(), "Tag");
     }
 
     @Override
