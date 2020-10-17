@@ -16,7 +16,7 @@ import java.util.List;
  * VERSION 8.1
  * UPDATE 20201016
  *
- * @author Mir(whdghks913)
+ * @author Mir(itmir913)
  *
  * Use : getDateNew, getKcalNew, getMealNew, getPeopleNew
  */

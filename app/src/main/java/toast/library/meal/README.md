@@ -1,4 +1,4 @@
-# Android Meal Library with Mir(whdghks913)
+# Android Meal Library with Mir(itmir913)
 ## VERSION 8.1 (UPDATE 20201016)
 
 ***
@@ -10,7 +10,7 @@
 
 
 ## How To MealLibrary?
-* [Sample Library 확인하기](https://bitbucket.org/whdghks913/androidmeallibrary)
+* [Sample Library 확인하기](https://github.com/itmir913/androidmeallibrary)
 * [Android Meal Library Guide](http://itmir.tistory.com/579)
 
 
@@ -66,7 +66,7 @@ AsyncTask를 사용하여 라이브러리를 사용해 주세요, 어떻게 쓰�
 - ITcraft's Github Project의 오픈소스 : https://github.com/mhkim4886/OkdongMidSch/blob/master/src/toast/library/meal/MealLibrary.java
 - 원본 라이센스 : Public Open Library
 - 수정 : 2014-03-16 ~
-- 업로드 : https://bitbucket.org/whdghks913/wondanghighschool (src/toast/library/meal/MealLibrary.java)
+- 업로드 : https://github.com/itmir913/wondanghighschool (src/toast/library/meal/MealLibrary.java)
 
 ***
 
